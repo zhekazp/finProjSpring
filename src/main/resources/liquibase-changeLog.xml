@@ -67,6 +67,83 @@
         </insert>
     </changeSet>
 
+    <changeSet id="create.table.category" author="ak">
+        <createTable tableName="category">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create.table.product" author="ak">
+        <createTable tableName="product">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="category_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price" type="decimal(10,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_in_stock" type="boolean">
+                <constraints nullable="true"/>
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="product"
+                                 baseColumnNames="user_id"
+                                 constraintName="fk_product_user_id"
+                                 referencedTableName="user"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="add_fk_to_product" author="ak">
+        <addForeignKeyConstraint
+                baseTableName="product"
+                baseColumnNames="category_id"
+                constraintName="FK_product_category"
+                referencedTableName="category"
+                referencedColumnNames="id"
+                onDelete="CASCADE"
+                onUpdate="CASCADE"/>
+    </changeSet>
+
+    <changeSet id="insert.data.category" author="author2">
+        <insert tableName="category">
+            <column name="name" value="Electronics"/>
+        </insert>
+
+        <insert tableName="category">
+            <column name="name" value="Books"/>
+        </insert>
+
+        <insert tableName="category">
+            <column name="name" value="Vehicles"/>
+        </insert>
+
+        <insert tableName="category">
+            <column name="name" value="Suits"/>
+        </insert>
+
+        <insert tableName="category">
+            <column name="name" value="Equipment"/>
+        </insert>
+
+        <insert tableName="category">
+            <column name="name" value="Others"/>
+        </insert>
+    </changeSet>
+
 
 
 </databaseChangeLog>
