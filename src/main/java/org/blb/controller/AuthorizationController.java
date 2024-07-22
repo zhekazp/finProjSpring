@@ -1,7 +1,8 @@
 package org.blb.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.blb.DTO.OneMessageDTO;
+import org.blb.DTO.appDTO.OneMessageDTO;
+import org.blb.DTO.appDTO.StandardResponseDto;
 import org.blb.DTO.user.UserNewDTO;
 import org.blb.controller.api.AuthApi;
 import org.blb.security.dto.AuthRequest;
@@ -23,14 +24,15 @@ public class AuthorizationController implements AuthApi {
     }
 
     @Override
-    public ResponseEntity<OneMessageDTO> registration(UserNewDTO user) {
+    public ResponseEntity<StandardResponseDto> registration(UserNewDTO user) {
         userAuthService.addUser(user);
-        return ResponseEntity.ok(new OneMessageDTO("Confirmation sanded to your email"));
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(new StandardResponseDto("Confirmation sanded to your email"));
     }
 
     @Override
-    public ResponseEntity<OneMessageDTO> confirmation(Long id, String code) {
-       return userAuthService.confirm(id, code);
+    public ResponseEntity<StandardResponseDto> confirmation(String data, String code) {
+       return userAuthService.confirm(data, code);
     }
 
 

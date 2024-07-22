@@ -1,4 +1,4 @@
-package org.blb.DTO;
+package org.blb.DTO.appDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

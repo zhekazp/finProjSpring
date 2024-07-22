@@ -24,7 +24,7 @@ public class UserFindService {
     public User findUserById(Long id) {
         return repository.findById(id)
                 .orElseThrow(()
-                        -> new RestException(HttpStatus.NOT_FOUND, "User not found"));
+                        -> new RestException(HttpStatus.NOT_FOUND,  "User not found"));
     }
     public void findUserByEmail(String Email) {
         if(repository.findUserByEmail(Email).isPresent()){
