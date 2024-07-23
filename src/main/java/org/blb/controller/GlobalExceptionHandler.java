@@ -51,4 +51,6 @@ public class GlobalExceptionHandler {
                 .toList();
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
+
+
 }
