@@ -1,7 +1,7 @@
 package org.blb.service.startTest;
 
 import lombok.AllArgsConstructor;
-import org.blb.DTO.blog.BlogAddDTO;
+import org.blb.DTO.blog.BlogAddRequestDTO;
 import org.blb.models.blog.Blog;
 import org.blb.models.region.Region;
 import org.blb.models.user.User;
@@ -25,7 +25,7 @@ public class StartTestRepository {
             } else {
                 reg = i - 15;
             }
-            BlogAddDTO dto = new BlogAddDTO("some titl N" + i, "Lorem ipsum dolor sit amet. Et deleniti dolor qui quisquam galisum quo aspernatur consequatur ut vero minima et commodi pariatur. Sed repellendus voluptatem et voluptatem vero et galisum praesentium ut voluptate nostrum quo pariatur accusantium non nesciunt omnis.\n" +
+            BlogAddRequestDTO dto = new BlogAddRequestDTO("some titl N" + i, "Lorem ipsum dolor sit amet. Et deleniti dolor qui quisquam galisum quo aspernatur consequatur ut vero minima et commodi pariatur. Sed repellendus voluptatem et voluptatem vero et galisum praesentium ut voluptate nostrum quo pariatur accusantium non nesciunt omnis.\n" +
                     "\n" +
                     "Id placeat deleniti quo vitae dolorem vel illum quia aut sunt vero! Eos cupiditate maxime et earum impedit nam voluptas neque nam perspiciatis iusto At internos accusantium. Id odio voluptates a quam dolorem et impedit voluptate qui sapiente aliquid id voluptatem sequi! Ut illum iure sed nisi distinctio a quos autem non minima voluptas rem inventore neque.\n" +
                     "\n" +
