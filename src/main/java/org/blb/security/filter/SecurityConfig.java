@@ -42,7 +42,7 @@ public class SecurityConfig {
 //                        .requestMatchers("/api/user/registration/**").permitAll()
 //                        .requestMatchers("/api/public/**").permitAll()
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/api/users/**").hasAnyRole("USER","ADMIN")
+                        .requestMatchers("/blog/**").hasAnyRole("USER","ADMIN")
                         .anyRequest().permitAll())
 
                 .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);

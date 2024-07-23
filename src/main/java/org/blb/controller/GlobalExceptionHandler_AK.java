@@ -1,14 +1,12 @@
 package org.blb.controller;
 
 import jakarta.validation.ConstraintViolationException;
-import org.blb.DTO.appDTO.StandardResponseDto;
 import org.blb.DTO.errorDto.ErrorResponseDto;
 import org.blb.DTO.errorDto.FieldErrorDto;
 import org.blb.DTO.validationErrorDto.ValidationErrorDto;
 import org.blb.DTO.validationErrorDto.ValidationErrorsDto;
 import org.blb.exeption.AlreadyExistException;
 import org.blb.exeption.NotFoundException;
-import org.blb.exeption.RestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -21,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @ControllerAdvice
-public class GlobalExceptionHandler {
+public class GlobalExceptionHandler_AK {
 
         @ExceptionHandler(NotFoundException.class)
         public ResponseEntity<ErrorResponseDto> handlerNotFoundException(NotFoundException exception){
@@ -30,11 +28,6 @@ public class GlobalExceptionHandler {
                     .build();
             return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
         }
-
-    @ExceptionHandler(RestException.class)
-    public ResponseEntity<StandardResponseDto> handlerRestException(RestException exception) {
-        return new ResponseEntity<>(new StandardResponseDto(exception.getMessage()), exception.getStatus());
-    }
 
 
         @ExceptionHandler(AlreadyExistException.class)
@@ -113,5 +106,4 @@ public class GlobalExceptionHandler {
                             .errors(validationErrors)
                             .build());
         }
-
 }
