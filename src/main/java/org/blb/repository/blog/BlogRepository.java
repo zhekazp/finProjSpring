@@ -1,4 +1,4 @@
-package org.blb.repository;
+package org.blb.repository.blog;
 
 
 import org.blb.models.blog.Blog;
