@@ -1,6 +1,7 @@
 package org.blb.service.blog;
 
 import lombok.AllArgsConstructor;
+import org.blb.DTO.appDTO.StandardResponseDto;
 import org.blb.DTO.blog.BlogAddRequestDTO;
 import org.blb.DTO.blog.BlogResponseDTO;
 import org.blb.models.blog.Blog;
@@ -21,10 +22,11 @@ public class BlogAddService {
     UserFindService userFindService;
 
 
-    public BlogResponseDTO addBlog(BlogAddRequestDTO blog) {
+    public StandardResponseDto addBlog(BlogAddRequestDTO blog) {
         User user = userFindService.findUserById(blog.getAuthor());
         Region region = findRegionService.findRegionById(blog.getRegion());
         Blog newBlog = blog.dtoToBlog(user, region);
-        return new BlogResponseDTO(blogRepository.save(newBlog).getId());
+        blogRepository.save(newBlog);
+        return new StandardResponseDto("Blog added successfully");
     }
 }
