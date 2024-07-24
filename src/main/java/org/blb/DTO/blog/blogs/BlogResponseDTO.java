@@ -9,15 +9,21 @@ import org.blb.models.user.User;
 import java.time.LocalDate;
 
 @Data
-@Schema(name = "Blog Response", description = "Return inserted blog id")
+@Schema(name = "Blog data")
 public class BlogResponseDTO {
     @Schema(description = "Blog id", example = "7")
     private Long id;
+    @Schema(description = "Blog title", example = "Some title")
     private String title;
+    @Schema(description = "Date of publishing", example = "2024-07-23")
     private LocalDate publishedDate;
+    @Schema(description = "Count of blog views", example = "1000")
     private Integer views;
+    @Schema(description = "Count of blog comment", example = "10")
     private Integer comments;
+    @Schema(description = "Author`s name of the blog", example = "Tom")
     private String authorName;
+    @Schema(description = "Name of the region", example = "Brandenburg")
     private String regionName;
 
     public BlogResponseDTO(Long id, String title, LocalDate publishedDate,
