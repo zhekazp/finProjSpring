@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "news_unlike")
-public class NewsUnlike {
+@Table(name = "news_dislike")
+public class NewsDislike {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,7 +21,7 @@ public class NewsUnlike {
     private NewsDataEntity newsData;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "news_unlike_user_id", referencedColumnName = "id")
+    @JoinColumn(name = "news_dislike_user_id", referencedColumnName = "id")
     private User user;
 
 }
