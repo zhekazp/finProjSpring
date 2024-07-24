@@ -1,21 +1,8 @@
-package org.blb.models.advertising;
-
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+package org.blb.DTO.advertisingDto;
 
 import java.time.LocalDate;
 
-
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Entity
-public class Advertising {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class AdvertisingResponseDto {
     private Long id;
     private String title;
     private String description;
