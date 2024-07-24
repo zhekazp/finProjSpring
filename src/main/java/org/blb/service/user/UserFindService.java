@@ -1,5 +1,7 @@
 package org.blb.service.user;
 
+import org.blb.exeption.AlreadyExistException;
+import org.blb.exeption.NotFoundException;
 import org.blb.exeption.RestException;
 import org.blb.models.user.User;
 import org.blb.repository.UserRepository;
@@ -31,11 +33,11 @@ public class UserFindService {
     public User findUserById(Long id) {
         return repository.findById(id)
                 .orElseThrow(()
-                        -> new RestException(HttpStatus.NOT_FOUND,  "User not found"));
+                        -> new NotFoundException( "User not found"));
     }
     public void findUserForAuth(String Email) {
         if(repository.findUserByEmail(Email).isPresent()){
-            throw new RestException(HttpStatus.CONFLICT, "User with Email : " + Email + " has already registered");
+            throw new AlreadyExistException( "User with Email : " + Email + " has already registered");
         }
     }
 }
