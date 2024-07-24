@@ -20,8 +20,6 @@ import java.time.LocalDateTime;
 @Schema(name = "Blog Response", description = "Return inserted blog id")
 @Builder
 public class BlogResponseDTO {
-    @Schema(description = "message", example = "blog added successfully")
-    private String message;
     @Schema(description = "Blog id", example = "7")
     private Long id;
 }

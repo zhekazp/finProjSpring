@@ -28,9 +28,6 @@ public class BlogAddRequestDTO {
     private String content;
     @NotNull
     @Min(1)
-    private Long author;
-    @NotNull
-    @Min(1)
     private Long region;
 
 

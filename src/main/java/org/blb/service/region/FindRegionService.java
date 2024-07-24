@@ -1,6 +1,7 @@
 package org.blb.service.region;
 
 import lombok.AllArgsConstructor;
+import org.blb.exeption.NotFoundException;
 import org.blb.models.region.Region;
 import org.blb.repository.RegionRepository;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public class FindRegionService {
         if (foundedRegionOpt.isPresent()) {
             return foundedRegionOpt.get();
         }else {
-            throw new RuntimeException();
+            throw new NotFoundException("Region not found");
         }
     }
 
