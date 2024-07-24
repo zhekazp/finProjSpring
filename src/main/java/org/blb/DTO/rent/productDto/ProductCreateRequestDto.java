@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.blb.DTO.RegionDto;
+import org.blb.DTO.region.RegionDTO;
 import org.blb.DTO.rent.categoryDto.CategoryCreateRequestDto;
 
 
@@ -30,7 +30,7 @@ public class ProductCreateRequestDto {
     private Boolean isInStock;
 
     @NotNull(message = "Region by product must be not null.")
-    private RegionDto region;
+    private RegionDTO region;
     private Long user;
 
 }

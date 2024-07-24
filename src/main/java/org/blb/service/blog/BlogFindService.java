@@ -28,7 +28,7 @@ public class BlogFindService {
         Pageable page= PageRequest.of(dto.getPageNumber(), 10);
         Page<BlogResponseDTO> blogs;
         if (dto.getRegion_ID() != 0) {
-            Region region = findRegionService.findRegionById(dto.getRegion_ID());
+            Region region = findRegionService.getRegionById(dto.getRegion_ID());
             blogs = blogFindRepository.findDTOByRegion(region, page);
         } else{
             blogs= blogFindRepository.findAllByOrderByIdDesc(page);
