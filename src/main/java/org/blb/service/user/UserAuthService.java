@@ -44,7 +44,7 @@ public class UserAuthService {
 
     @Transactional
     public void addUser(UserNewDTO user) {
-        userFindService.findUserByEmail(user.getEmail());
+        userFindService.findUserForAuth(user.getEmail());
         Role role = roleRepository.findByRole("USER");
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -63,7 +63,6 @@ public class UserAuthService {
                         password
                 )
         );
-
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String jwt = tokenProvider.createToken(authentication.getName());

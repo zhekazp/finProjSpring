@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class BlogsRequestDTO {
-    Long pageNumber;
+    Integer pageNumber;
     Long region_ID;
 }

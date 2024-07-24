@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class StartTestRepository {
+public class StartTestService {
     private final UserFindService userFindService;
     private final BlogRepository blogRepository;
     private final FindRegionService findRegionService;
@@ -30,7 +30,7 @@ public class StartTestRepository {
                     "Id placeat deleniti quo vitae dolorem vel illum quia aut sunt vero! Eos cupiditate maxime et earum impedit nam voluptas neque nam perspiciatis iusto At internos accusantium. Id odio voluptates a quam dolorem et impedit voluptate qui sapiente aliquid id voluptatem sequi! Ut illum iure sed nisi distinctio a quos autem non minima voluptas rem inventore neque.\n" +
                     "\n" +
                     "Qui vitae iste eos internos dolor ea ipsa temporibus hic rerum omnis et quos quasi eos quia natus sed dolores voluptas. Ut architecto galisum aut commodi laboriosam et voluptates molestias sed quis fugit. Qui deleniti eligendi est exercitationem repudiandae At sunt quibusdam sed optio ipsum et tempore animi.",
-                    (long) 1, (long) reg);
+                     (long) reg);
             User user = userFindService.findUserById((long) 1);
             Region region = findRegionService.findRegionById((long) reg);
             Blog blog = dto.dtoToBlog(user, region);

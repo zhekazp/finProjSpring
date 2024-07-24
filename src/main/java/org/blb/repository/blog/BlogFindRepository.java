@@ -9,5 +9,6 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface BlogFindRepository extends PagingAndSortingRepository<Blog, Long> {
+
     Page<Blog> findAllByRegion(Region region, Pageable pageable);
 }

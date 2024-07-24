@@ -23,11 +23,13 @@ public class BlogFindService {
     private final BlogFindRepository blogFindRepository;
     private final FindRegionService findRegionService;
 
-    public List<BlogResponseDTO> findAll(BlogsRequestDTO dto) {
+    public Page<Blog>  findAll(BlogsRequestDTO dto) {
         Region region = findRegionService.findRegionById(dto.getRegion_ID());
-        Pageable page = PageRequest.of(0, 2);
+        System.out.println(region.getRegionName());
+        Pageable page = PageRequest.of(dto.getPageNumber(), 10);
         Page<Blog> blogs = blogFindRepository.findAllByRegion(region, page);
-        return new ArrayList<>();
+
+        return blogs;
     }
 //    public Blog findById(Integer id) {
 //        return blogRepository.findById(id).orElseThrow(()->
