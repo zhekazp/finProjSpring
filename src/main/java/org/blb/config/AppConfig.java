@@ -4,6 +4,7 @@ package org.blb.config;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.template.Configuration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
 
 @org.springframework.context.annotation.Configuration
 public class AppConfig {
@@ -18,6 +19,9 @@ public class AppConfig {
         return configuration;
     }
 
-
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
 
 }

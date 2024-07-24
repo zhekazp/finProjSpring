@@ -6,7 +6,7 @@ import org.blb.DTO.blog.BlogAddRequestDTO;
 import org.blb.models.blog.Blog;
 import org.blb.models.region.Region;
 import org.blb.models.user.User;
-import org.blb.repository.RegionRepository;
+import org.blb.repository.region.RegionRepository;
 import org.blb.repository.blog.BlogRepository;
 import org.blb.service.region.FindRegionService;
 import org.blb.service.user.UserFindService;
@@ -23,7 +23,7 @@ public class BlogDataService {
 
     public StandardResponseDto addBlog(BlogAddRequestDTO blog) {
         User user = userFindService.getUserFromContext();
-        Region region = findRegionService.findRegionById(blog.getRegion());
+        Region region = findRegionService.getRegionById(blog.getRegion());
         Blog newBlog = blog.dtoToBlog(user, region);
         blogRepository.save(newBlog);
         return new StandardResponseDto("Blog added successfully");

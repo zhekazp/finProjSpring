@@ -18,7 +18,7 @@ public class NewsDataEntity {
     private Long id;
 
    @ManyToOne
-   @JoinColumn(name = "region_news_id", referencedColumnName = "regionNewsId")
+   @JoinColumn(name = "region_id", referencedColumnName = "id")
    private Region region = new Region();
 
     private String sectionName;

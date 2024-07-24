@@ -32,7 +32,7 @@ public class StartTestService {
                     "Qui vitae iste eos internos dolor ea ipsa temporibus hic rerum omnis et quos quasi eos quia natus sed dolores voluptas. Ut architecto galisum aut commodi laboriosam et voluptates molestias sed quis fugit. Qui deleniti eligendi est exercitationem repudiandae At sunt quibusdam sed optio ipsum et tempore animi.",
                      (long) reg);
             User user = userFindService.findUserById((long) 1);
-            Region region = findRegionService.findRegionById((long) reg);
+            Region region = findRegionService.getRegionById((long) reg);
             Blog blog = dto.dtoToBlog(user, region);
             blogRepository.save(blog);
         }
