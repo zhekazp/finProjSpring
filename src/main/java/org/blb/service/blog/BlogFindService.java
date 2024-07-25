@@ -42,8 +42,15 @@ public class BlogFindService {
         return response;
     }
 
-    public ContentResponseDTO findById(Long id) {
+    public Blog findById(long id) {
+        return blogRepository.findById(id).orElseThrow(
+                () -> new NotFoundException("Blog not found")
+        );
+    }
+    public ContentResponseDTO getContent(Long id) {
         return blogRepository.findBlogById(id).orElseThrow(() ->
                 new NotFoundException("Blog with id " + id +" not found" ));
     }
+
+
 }
