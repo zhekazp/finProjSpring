@@ -24,29 +24,7 @@ public class BlogUpdateService {
     private final BlogRepository blogRepository;
     private final FindRegionService findRegionService;
 
-    //    private BlogRepository blogRepository;
-//
-//    public void update(BlogRequestDTO blogDTO) {
-//        if (blogDTO.getId() == null) {
-//            throw new NullArgException("id");
-//        }
-//        // tot ge user dolgen bit
-//        userFindService.findUserById(blogDTO.getAuthorId());
-//        Blog blog = blogFindService.findById(blogDTO.getId());
-//        blog.setContent(blogDTO.getContent());
-//        blog.setEditedDate(LocalDateTime.now());
-//        blogRepository.save(blog);
-//    }
-//    @Transactional
-//    public void increaseComments(Integer blogId) {
-//        blogRepository.updateComment(blogId);
-//    }
-//
-//    @Transactional
-//    public void increaseViews(Integer blogId) {
-//        blogRepository.updateViews(blogId);
-//    }
-//
+
     public void remove(StandardDelRequest dto) {
         Blog blog = getBlogForUpdate(dto.getId());
         blogRepository.deleteById(blog.getId());

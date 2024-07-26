@@ -2,7 +2,6 @@ package org.blb.DTO.blog.blogs;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import org.blb.models.blog.Blog;
 import org.blb.models.region.Region;
 import org.blb.models.user.User;
 

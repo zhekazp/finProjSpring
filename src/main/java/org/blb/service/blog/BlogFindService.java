@@ -10,14 +10,12 @@ import org.blb.models.blog.Blog;
 import org.blb.models.region.Region;
 import org.blb.repository.blog.BlogFindRepository;
 import org.blb.repository.blog.BlogRepository;
+import org.blb.service.blog.blogComment.BlCmFindService;
 import org.blb.service.region.FindRegionService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -27,6 +25,8 @@ public class BlogFindService {
     private final BlogFindRepository blogFindRepository;
     private final FindRegionService findRegionService;
     private final BlogRepository blogRepository;
+    private final BlCmFindService blCmFindService;
+
     public BlogsResponseDTO findAll(BlogsRequestDTO dto) {
         Pageable page = PageRequest.of(dto.getPageNumber(), 10);
         Page<BlogResponseDTO> blogs;
@@ -48,8 +48,9 @@ public class BlogFindService {
         );
     }
     public ContentResponseDTO getContent(Long id) {
-        return blogRepository.findBlogById(id).orElseThrow(() ->
-                new NotFoundException("Blog with id " + id +" not found" ));
+       Blog blog = blogRepository.findById(id).orElseThrow(
+                () ->new NotFoundException("Blog with id " + id +" not found" ));
+        return new ContentResponseDTO(blog.getContent(), blCmFindService.getCommentsOfBlog(blog));
     }
 
 

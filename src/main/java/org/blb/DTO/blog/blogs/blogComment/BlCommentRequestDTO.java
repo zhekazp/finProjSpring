@@ -1,4 +1,4 @@
-package org.blb.DTO.blogComment;
+package org.blb.DTO.blog.blogs.blogComment;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
