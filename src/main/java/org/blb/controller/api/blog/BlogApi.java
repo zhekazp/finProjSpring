@@ -10,6 +10,7 @@ import org.blb.DTO.appDTO.StandardDelRequest;
 import org.blb.DTO.appDTO.StandardResponseDto;
 import org.blb.DTO.blog.BlogAddRequestDTO;
 import org.blb.DTO.blog.BlogUpdateDTO;
+import org.blb.DTO.blog.blogs.BlogCommentRequestDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -61,4 +62,34 @@ public interface BlogApi {
 
     @PostMapping()
     public ResponseEntity<StandardResponseDto> updateBlog(@RequestBody @Valid BlogUpdateDTO dto);
+
+    @Operation(summary = "Adding new blog comment", description = "The operation is available to registered user, add new comment")
+    @ApiResponses( value = {
+            @ApiResponse(responseCode = "200", description ="Information comment blog adding",
+                    content = @Content(mediaType = "application/json",
+                            examples = @ExampleObject(value = "{ \"message\": \"Comment added successfully\"}"))),
+            @ApiResponse(responseCode = "404", description = "Blog not found",
+                    content = @Content(mediaType = "application/json",
+                            examples = @ExampleObject(value = "{\"message\": \" Blog not found\"}")))
+
+    })
+
+    @PutMapping("/comment")
+
+    public ResponseEntity<StandardResponseDto> addComment(@RequestBody @Valid BlogCommentRequestDTO dto);
+
+    @Operation(summary = "Adding new blog comment", description = "The operation is available to registered user, add new comment")
+    @ApiResponses( value = {
+            @ApiResponse(responseCode = "200", description ="Information comment blog adding",
+                    content = @Content(mediaType = "application/json",
+                            examples = @ExampleObject(value = "{ \"message\": \"Comment added successfully\"}"))),
+            @ApiResponse(responseCode = "404", description = "Blog not found",
+                    content = @Content(mediaType = "application/json",
+                            examples = @ExampleObject(value = "{\"message\": \" Blog not found\"}")))
+
+    })
+
+    @DeleteMapping("/comment")
+    public ResponseEntity<StandardResponseDto> delComment(@RequestBody @Valid StandardDelRequest dto);
+
 }

@@ -1,9 +1,7 @@
 package org.blb.controller.blog;
 
 import lombok.RequiredArgsConstructor;
-
 import org.blb.DTO.blog.BlogsRequestDTO;
-
 import org.blb.DTO.blog.blogs.BlogsResponseDTO;
 import org.blb.DTO.blog.blogs.ContentResponseDTO;
 import org.blb.controller.api.blog.BlogsApi;
