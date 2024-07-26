@@ -6,13 +6,14 @@ import org.blb.DTO.region.RegionDTO;
 import org.blb.DTO.rent.categoryDto.CategoryCreateRequestDto;
 import org.blb.DTO.rent.productDto.ProductCreateRequestDto;
 import org.blb.DTO.rent.productDto.ProductResponseDto;
+import org.blb.DTO.user.UserJustWithNameDto;
 import org.blb.models.region.Region;
 import org.blb.models.rent.Category;
 import org.blb.models.rent.Product;
 import org.blb.models.user.User;
-import org.blb.repository.UserRepository;
 import org.blb.repository.region.RegionRepository;
 import org.blb.repository.rent.CategoryRepository;
+import org.blb.service.user.UserFindService;
 import org.springframework.stereotype.Service;
 
 
@@ -22,50 +23,50 @@ import java.util.Optional;
 @AllArgsConstructor
 public class ProductConverter {
 
-    private final UserRepository userRepository;
     public final CategoryRepository categoryRepository;
     public final RegionRepository regionRepository;
+    public final UserFindService userFindService;
 
 
     public Product fromDto(ProductCreateRequestDto dto){
         Product product = new Product();
 
-        if(dto.getName() != null){
+        if(dto.getName() != null) {
             product.setName(dto.getName());
         }
 
-        if (dto.getCategory() != null) {
+        if(dto.getCategory() != null) {
             Optional<Category> categoryOpt = categoryRepository.findByName(dto.getCategory().getName());
             categoryOpt.ifPresent(product::setCategory);
         }
 
-        if(dto.getPrice() != null){
+        if(dto.getPrice() != null) {
             product.setPrice(dto.getPrice());
         }
 
-        if(dto.getIsInStock() != null){
+        if(dto.getIsInStock() != null) {
             product.setIsInStock(dto.getIsInStock());
         }
 
-        if(dto.getDescription() != null){
+        if(dto.getDescription() != null) {
             product.setDescription(dto.getDescription());
         }
 
-        if (dto.getRegion() != null) {
+        if(dto.getRegion() != null) {
             Optional<Region> regionOpt = regionRepository.findByRegionName(dto.getRegion().getRegionName());
             regionOpt.ifPresent(product::setRegion);
         }
 
-        if (dto.getUser() != null) {
-            Optional<User> userOpt = userRepository.findById(dto.getUser());
-            userOpt.ifPresent(product::setUser);
-        }
+        // Получаем пользователя из контекста безопасности
+        User user = userFindService.getUserFromContext();
+        product.setUser(user);
 
         return product;
     }
 
     public ProductResponseDto toDto(Product product){
         ProductResponseDto productResponseDto = new ProductResponseDto();
+        UserJustWithNameDto userDto = new UserJustWithNameDto(product.getUser().getName());
 
         if(product.getName() != null){
             productResponseDto.setName(product.getName());
@@ -86,8 +87,11 @@ public class ProductConverter {
         }
 
         if (product.getRegion() != null) {
-            RegionDTO regionDtowithoutId = new RegionDTO(product.getRegion().getRegionName());
-            productResponseDto.setRegion(regionDtowithoutId);
+            RegionDTO regionDto = new RegionDTO(product.getRegion().getRegionName());
+            productResponseDto.setRegion(regionDto);
+        }
+        if(product.getUser() !=null){
+            productResponseDto.setOwner(userDto);
         }
 
         return productResponseDto;
