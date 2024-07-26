@@ -3,6 +3,7 @@ package org.blb.controller.api.rent.product;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import org.blb.DTO.appDTO.OneMessageDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,5 +21,5 @@ public interface DeleteProductControllerApi {
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @DeleteMapping("/{id}")
-    ResponseEntity<Void> deleteProductById(@PathVariable Long id);
+    ResponseEntity<OneMessageDTO> deleteProductById(@PathVariable Long id);
 }
