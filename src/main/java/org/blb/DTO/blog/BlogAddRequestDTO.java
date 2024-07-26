@@ -12,7 +12,6 @@ import org.blb.models.blog.Blog;
 import org.blb.models.region.Region;
 import org.blb.models.user.User;
 
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
