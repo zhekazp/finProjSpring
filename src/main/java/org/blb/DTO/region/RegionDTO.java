@@ -18,4 +18,8 @@ public class RegionDTO {
     @NotBlank(message = "Region name must be not blank.")
     @NotNull(message = "Region name must be not null.")
     private String regionName;
+
+    public RegionDTO(String regionName) {
+        this.regionName = regionName;
+    }
 }
