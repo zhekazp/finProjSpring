@@ -18,7 +18,7 @@ public class UpdateProductController implements UpdateProductControllerApi {
     private final UpdateProductService updateProductService;
 
     @Override
-    @PutMapping("/updateProductById/{id}")
+    @PutMapping("{id}")
     public ResponseEntity<ProductResponseDto> updateProduct(
             @PathVariable Long id,
             @RequestBody ProductCreateRequestDto productCreateRequestDto) {

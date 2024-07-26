@@ -22,7 +22,7 @@ public class AddProductController implements AddProductControllerApi {
     private final AddProductService addProductService;
     private final CategoryRepository categoryRepository;
 
-    @PostMapping("/new")
+    @PostMapping
     public ResponseEntity<?> addNewProduct(@Valid @RequestBody ProductCreateRequestDto request) {
         return addProductService.addProduct(request);
     }
