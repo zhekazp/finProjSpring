@@ -13,6 +13,7 @@ import org.blb.repository.UserRepository;
 import org.blb.repository.region.RegionRepository;
 import org.blb.repository.rent.CategoryRepository;
 import org.blb.repository.rent.ProductRepository;
+import org.blb.service.user.UserFindService;
 import org.blb.service.util.rentMapping.ProductConverter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,29 +31,13 @@ public class AddProductService {
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
     private final ProductConverter productConverter;
-    private final UserRepository userRepository;
+    private final UserFindService userFindService;
     private final RegionRepository regionRepository;
 
     public ResponseEntity<?> addProduct(ProductCreateRequestDto requestDto) {
         List<ValidationErrorDto> errors = new ArrayList<>();
 
-        if (requestDto.getUser() == null) {
-            errors.add(new ValidationErrorDto("user", "User not found"));
-        } else {
-            userRepository.findById(requestDto.getUser()).orElse(null);
-            if (!userRepository.existsById(requestDto.getUser())) {
-                errors.add(new ValidationErrorDto("user", "User with id " + requestDto.getUser() + " not found."));
-            }
-        }
-
-        if (requestDto.getRegion() == null || requestDto.getRegion().getRegionName() == null) {
-            errors.add(new ValidationErrorDto("region", "Region not found"));
-        } else {
-            if (!regionRepository.findByRegionName(requestDto.getRegion().getRegionName()).isPresent()) {
-                errors.add(new ValidationErrorDto("region", "Region with name " + requestDto.getRegion().getRegionName() + " not found."));
-            }
-        }
-
+         //validation Category
         if (requestDto.getCategory() == null) {
             errors.add(new ValidationErrorDto("category", "Category not found"));
         } else {
@@ -61,25 +46,30 @@ public class AddProductService {
             }
         }
 
+        //validation Region
+        if (requestDto.getRegion() == null || requestDto.getRegion().getRegionName() == null) {
+            errors.add(new ValidationErrorDto("region", "Region not found"));
+        } else {
+            if (!regionRepository.findByRegionName(requestDto.getRegion().getRegionName()).isPresent()) {
+                errors.add(new ValidationErrorDto("region", "Region with name " + requestDto.getRegion().getRegionName() + " not found."));
+            }
+        }
+
         if (!errors.isEmpty()) {
             return new ResponseEntity<>(new ValidationErrorsDto(errors), HttpStatus.BAD_REQUEST);
         }
 
         try {
-
             Product productForAdd = productConverter.fromDto(requestDto);
 
             productForAdd.setIsInStock(requestDto.getIsInStock() != null ? requestDto.getIsInStock() : true);
 
-            if (requestDto.getUser() != null) {
-                User user = userRepository.findById(requestDto.getUser()).orElseThrow();
-                productForAdd.setUser(user);
-            }
+            // Getting the user from the security context
+            User user = userFindService.getUserFromContext();
+            productForAdd.setUser(user);
 
-            if (requestDto.getRegion() != null) {
-                Region region = regionRepository.findByRegionName(requestDto.getRegion().getRegionName()).orElseThrow();
-                productForAdd.setRegion(region);
-            }
+            Region region = regionRepository.findByRegionName(requestDto.getRegion().getRegionName()).orElseThrow();
+            productForAdd.setRegion(region);
 
             productForAdd.setDescription(requestDto.getDescription());
 
@@ -90,6 +80,7 @@ public class AddProductService {
         } catch (NotFoundException e) {
             return new ResponseEntity<>(new OneMessageDTO(e.getMessage()), HttpStatus.NOT_FOUND);
         } catch (Exception e) {
+            // Log and handle the remaining exceptions
             e.printStackTrace();
             return new ResponseEntity<>(new OneMessageDTO("An unexpected error occurred. Please try again later."), HttpStatus.INTERNAL_SERVER_ERROR);
         }

@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import org.blb.DTO.appDTO.OneMessageDTO;
 import org.blb.DTO.rent.productDto.ProductCreateRequestDto;
 import org.blb.DTO.rent.productDto.ProductResponseDto;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +28,7 @@ public interface UpdateProductControllerApi {
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     @PutMapping("/{id}")
-    ResponseEntity<ProductResponseDto> updateProduct(
+    ResponseEntity<OneMessageDTO> updateProduct(
             @PathVariable Long id,
             @RequestBody ProductCreateRequestDto productCreateRequestDto);
 }
