@@ -31,33 +31,19 @@ public class ProductConverter {
     public Product fromDto(ProductCreateRequestDto dto){
         Product product = new Product();
 
-        if(dto.getName() != null) {
-            product.setName(dto.getName());
+        product.setName(dto.getName());
+        product.setPrice(dto.getPrice());
+        product.setIsInStock(dto.getIsInStock() != null ? dto.getIsInStock() : true);
+        product.setDescription(dto.getDescription());
+
+        if (dto.getCategory() != null) {
+            product.setCategory(categoryRepository.findByName(dto.getCategory().getName()).orElse(null));
         }
 
-        if(dto.getCategory() != null) {
-            Optional<Category> categoryOpt = categoryRepository.findByName(dto.getCategory().getName());
-            categoryOpt.ifPresent(product::setCategory);
+        if (dto.getRegion() != null) {
+            product.setRegion(regionRepository.findByRegionName(dto.getRegion().getRegionName()).orElse(null));
         }
 
-        if(dto.getPrice() != null) {
-            product.setPrice(dto.getPrice());
-        }
-
-        if(dto.getIsInStock() != null) {
-            product.setIsInStock(dto.getIsInStock());
-        }
-
-        if(dto.getDescription() != null) {
-            product.setDescription(dto.getDescription());
-        }
-
-        if(dto.getRegion() != null) {
-            Optional<Region> regionOpt = regionRepository.findByRegionName(dto.getRegion().getRegionName());
-            regionOpt.ifPresent(product::setRegion);
-        }
-
-        // Получаем пользователя из контекста безопасности
         User user = userFindService.getUserFromContext();
         product.setUser(user);
 

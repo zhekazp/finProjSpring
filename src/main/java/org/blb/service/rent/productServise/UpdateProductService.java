@@ -37,7 +37,7 @@ public class UpdateProductService {
 
             // Checking that the current user is the owner of the product
             if (!existingProduct.getUser().getId().equals(currentUser.getId())) {
-                return new ResponseEntity<>(new OneMessageDTO("You do not have the rights to update this product."), HttpStatus.FORBIDDEN); // The user does not have permissions to update this product
+                return new ResponseEntity<>(new OneMessageDTO("You do not have the rights to update this product."), HttpStatus.CONFLICT); // The user does not have permissions to update this product
             }
 
             if (productCreateRequestDto.getName() != null) {
@@ -51,6 +51,7 @@ public class UpdateProductService {
                     return new ResponseEntity<>(new OneMessageDTO("Category with name " + productCreateRequestDto.getCategory().getName() + " not found."), HttpStatus.NOT_FOUND);
                 }
             }
+
             if (productCreateRequestDto.getPrice() != null) {
                 existingProduct.setPrice(productCreateRequestDto.getPrice());
             }

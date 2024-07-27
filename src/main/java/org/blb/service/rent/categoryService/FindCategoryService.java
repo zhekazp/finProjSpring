@@ -27,6 +27,6 @@ public class FindCategoryService {
     }
 
     private CategoryResponseDto toDto(Category category) {
-        return new CategoryResponseDto(category.getId(), category.getName());
+        return new CategoryResponseDto(category.getName());
     }
 }

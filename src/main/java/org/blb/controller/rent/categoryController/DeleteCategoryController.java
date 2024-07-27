@@ -1,6 +1,7 @@
 package org.blb.controller.rent.categoryController;
 
 import lombok.AllArgsConstructor;
+import org.blb.controller.api.rent.category.DeleteCategoryControllerApi;
 import org.blb.service.rent.categoryService.DeleteCategoryService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,15 +12,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/rent/categories/deleteCategory")
+@RequestMapping("/admin/rent/categories")
 @AllArgsConstructor
-public class DeleteCategoryController {
+public class DeleteCategoryController implements DeleteCategoryControllerApi {
 
 
     private final DeleteCategoryService deleteCategoryService;
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
+    public ResponseEntity<?> deleteCategory(@PathVariable Long id) {
         deleteCategoryService.deleteCategory(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
