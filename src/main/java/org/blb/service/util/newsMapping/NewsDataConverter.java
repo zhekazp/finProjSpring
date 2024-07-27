@@ -28,7 +28,7 @@ public class NewsDataConverter {
         dto.setTitleImageWide(newsDataEntity.getTitleImageWide());
         dto.setContent(newsDataEntity.getContent());
         dto.setLikeCount(newsDataEntity.getLikeCount());
-        dto.setUnlikeCount(newsDataEntity.getUnlikeCount());
+        dto.setDislikeCount(newsDataEntity.getDislikeCount());
         dto.setCommentsCount(newsDataEntity.getCommentsCount());
         return dto;
     }
@@ -36,7 +36,7 @@ public class NewsDataConverter {
     public NewsDataEntity fromFetchApiToEntity(FetchNewsDataDTO dto) {
         NewsDataEntity newsDataEntity = new NewsDataEntity();
 
-        Region region = regionConverter.fromDTO(findRegionService.findRegionById(dto.getRegionId()));
+        Region region = findRegionService.getRegionById(dto.getRegionId());
         newsDataEntity.setRegion(region);
         newsDataEntity.setSectionName(dto.getSectionName());
         newsDataEntity.setTitle(dto.getTitle());
@@ -47,3 +47,4 @@ public class NewsDataConverter {
         return newsDataEntity;
     }
 }
+
