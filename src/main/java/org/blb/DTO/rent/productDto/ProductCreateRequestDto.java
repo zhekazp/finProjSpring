@@ -31,6 +31,5 @@ public class ProductCreateRequestDto {
 
     @NotNull(message = "Region by product must be not null.")
     private RegionDTO region;
-    private Long user;
 
 }
