@@ -276,4 +276,44 @@
         <dropNotNullConstraint tableName="product" columnName="region_id" columnDataType="bigint"/>
     </changeSet>
 
+
+    <changeSet id="insert.data.product" author="ak">
+        <insert tableName="product">
+            <column name="name" value="Laptop"/>
+            <column name="category_id" value="1"/>
+            <column name="price" value="999.99"/>
+            <column name="is_in_stock" value="1"/>
+            <column name="user_id" value="1"/><!-- Administrator -->
+            <column name="region_id" value="6"/>
+            <column name="description" value="just new"/>
+        </insert>
+        <insert tableName="product">
+            <column name="name" value="All about Laptop"/>
+            <column name="category_id" value="2"/>
+            <column name="price" value="99"/>
+            <column name="is_in_stock" value="1"/>
+            <column name="user_id" value="1"/>
+            <column name="region_id" value="6"/>
+            <column name="description" value="new"/>
+        </insert>
+        <insert tableName="product">
+            <column name="name" value="Phone"/>
+            <column name="category_id" value="1"/>
+            <column name="price" value="800.5"/>
+            <column name="is_in_stock" value="1"/>
+            <column name="user_id" value="1"/>
+            <column name="region_id" value="2"/>
+            <column name="description" value="not new"/>
+        </insert>
+        <insert tableName="product">
+            <column name="name" value="Phone One"/>
+            <column name="category_id" value="1"/>
+            <column name="price" value="900.5"/>
+            <column name="is_in_stock" value="1"/>
+            <column name="user_id" value="1"/>
+            <column name="region_id" value="3"/>
+            <column name="description" value="new..."/>
+        </insert>
+    </changeSet>
+
 </databaseChangeLog>

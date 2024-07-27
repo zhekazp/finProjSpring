@@ -53,7 +53,7 @@ public class BlogController implements BlogApi {
     @Override
     public ResponseEntity<StandardResponseDto> delComment(StandardDelRequest dto) {
         blogCommentService.remove(dto);
-        return ResponseEntity.ok(new StandardResponseDto("Comment added successfully"));
+        return ResponseEntity.ok(new StandardResponseDto("Comment deleted successfully"));
     }
 
 

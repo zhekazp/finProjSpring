@@ -29,7 +29,7 @@ public interface BlogApi {
     })
 
     @PutMapping()
-    public ResponseEntity<StandardResponseDto> addBlog(@RequestBody @Valid BlogAddRequestDTO dto);
+    ResponseEntity<StandardResponseDto> addBlog(@RequestBody @Valid BlogAddRequestDTO dto);
 
     @Operation(summary = "Deleting blog", description = "The operation is available to owner of the blog or admin")
     @ApiResponses( value = {
@@ -45,7 +45,7 @@ public interface BlogApi {
     })
 
     @DeleteMapping()
-    public ResponseEntity<StandardResponseDto> delBlog(@RequestBody @Valid StandardDelRequest dto);
+    ResponseEntity<StandardResponseDto> delBlog(@RequestBody @Valid StandardDelRequest dto);
 
     @Operation(summary = "Updating blog", description = "The operation is available to owner of the blog or admin")
     @ApiResponses( value = {
@@ -61,7 +61,7 @@ public interface BlogApi {
     })
 
     @PostMapping()
-    public ResponseEntity<StandardResponseDto> updateBlog(@RequestBody @Valid BlogUpdateDTO dto);
+    ResponseEntity<StandardResponseDto> updateBlog(@RequestBody @Valid BlogUpdateDTO dto);
 
     @Operation(summary = "Adding new blog comment", description = "The operation is available to registered user, add new comment")
     @ApiResponses( value = {
@@ -76,20 +76,20 @@ public interface BlogApi {
 
     @PutMapping("/comment")
 
-    public ResponseEntity<StandardResponseDto> addComment(@RequestBody @Valid BlogCommentRequestDTO dto);
+    ResponseEntity<StandardResponseDto> addComment(@RequestBody @Valid BlogCommentRequestDTO dto);
 
-    @Operation(summary = "Adding new blog comment", description = "The operation is available to registered user, add new comment")
+    @Operation(summary = "Deleting the comment", description = "The operation is available to user, who published the comment")
     @ApiResponses( value = {
-            @ApiResponse(responseCode = "200", description ="Information comment blog adding",
+            @ApiResponse(responseCode = "200", description ="Information about comment deleting",
                     content = @Content(mediaType = "application/json",
-                            examples = @ExampleObject(value = "{ \"message\": \"Comment added successfully\"}"))),
+                            examples = @ExampleObject(value = "{ \"message\": \"Comment deleted successfully\"}"))),
             @ApiResponse(responseCode = "404", description = "Blog not found",
                     content = @Content(mediaType = "application/json",
-                            examples = @ExampleObject(value = "{\"message\": \" Blog not found\"}")))
+                            examples = @ExampleObject(value = "{\"message\": \" Comment not found\"}")))
 
     })
 
     @DeleteMapping("/comment")
-    public ResponseEntity<StandardResponseDto> delComment(@RequestBody @Valid StandardDelRequest dto);
+    ResponseEntity<StandardResponseDto> delComment(@RequestBody @Valid StandardDelRequest dto);
 
 }

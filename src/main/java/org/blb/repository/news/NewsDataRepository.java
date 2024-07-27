@@ -17,6 +17,7 @@ public interface NewsDataRepository extends JpaRepository<NewsDataEntity, Long> 
     List<NewsDataEntity> findBySectionNameAndRegionRegionName(String sectionName, String regionName);
     Optional<NewsDataEntity> findByTitle(String title);
 
+
     @Query("SELECT MAX(date) FROM NewsDataEntity")
     Optional<String> findLastDate();
 }

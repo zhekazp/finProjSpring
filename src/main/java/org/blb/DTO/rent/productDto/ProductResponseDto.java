@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.blb.DTO.region.RegionDTO;
 import org.blb.DTO.rent.categoryDto.CategoryCreateRequestDto;
+import org.blb.DTO.user.UserJustWithNameDto;
 
 
 @Data
@@ -18,5 +19,6 @@ public class ProductResponseDto {
     private String description;
     private RegionDTO region;
     private Boolean isInStock;
+    private UserJustWithNameDto owner;
 
 }

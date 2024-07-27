@@ -4,8 +4,12 @@ import lombok.AllArgsConstructor;
 import org.blb.DTO.blog.BlogAddRequestDTO;
 import org.blb.models.blog.Blog;
 import org.blb.models.region.Region;
+import org.blb.models.rent.Category;
+import org.blb.models.rent.Product;
 import org.blb.models.user.User;
 import org.blb.repository.blog.BlogRepository;
+import org.blb.repository.rent.CategoryRepository;
+import org.blb.repository.rent.ProductRepository;
 import org.blb.service.region.FindRegionService;
 import org.blb.service.user.UserFindService;
 import org.springframework.stereotype.Service;
@@ -16,6 +20,8 @@ public class StartTestService {
     private final UserFindService userFindService;
     private final BlogRepository blogRepository;
     private final FindRegionService findRegionService;
+    private final ProductRepository productRepository;
+    private final CategoryRepository categoryRepository;
 
     public void startBlog() {
         for (int i = 0; i < 20; i++) {
@@ -25,7 +31,7 @@ public class StartTestService {
             } else {
                 reg = i - 15;
             }
-            BlogAddRequestDTO dto = new BlogAddRequestDTO("some titl N" + i, "Lorem ipsum dolor sit amet. Et deleniti dolor qui quisquam galisum quo aspernatur consequatur ut vero minima et commodi pariatur. Sed repellendus voluptatem et voluptatem vero et galisum praesentium ut voluptate nostrum quo pariatur accusantium non nesciunt omnis.\n" +
+            BlogAddRequestDTO dto = new BlogAddRequestDTO("some title N" + i, "Lorem ipsum dolor sit amet. Et deleniti dolor qui quisquam galisum quo aspernatur consequatur ut vero minima et commodi pariatur. Sed repellendus voluptatem et voluptatem vero et galisum praesentium ut voluptate nostrum quo pariatur accusantium non nesciunt omnis.\n" +
                     "\n" +
                     "Id placeat deleniti quo vitae dolorem vel illum quia aut sunt vero! Eos cupiditate maxime et earum impedit nam voluptas neque nam perspiciatis iusto At internos accusantium. Id odio voluptates a quam dolorem et impedit voluptate qui sapiente aliquid id voluptatem sequi! Ut illum iure sed nisi distinctio a quos autem non minima voluptas rem inventore neque.\n" +
                     "\n" +
@@ -35,6 +41,14 @@ public class StartTestService {
             Region region = findRegionService.getRegionById((long) reg);
             Blog blog = dto.dtoToBlog(user, region);
             blogRepository.save(blog);
+            Category category = categoryRepository.findById((long)1).get();
+            System.out.println(category);
+            Product product = new Product("Verkaufe Tish", category, (double)i*10, true);
+            System.out.println(product);
+            product.setUser(user);
+            product.setRegion(region);
+            System.out.println(product);
+            System.out.println(productRepository.save(product));
         }
     }
 

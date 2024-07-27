@@ -2,6 +2,7 @@ package org.blb.controller.rent.productController;
 
 
 import lombok.AllArgsConstructor;
+import org.blb.DTO.appDTO.OneMessageDTO;
 import org.blb.DTO.rent.productDto.ProductCreateRequestDto;
 import org.blb.DTO.rent.productDto.ProductResponseDto;
 import org.blb.controller.api.rent.product.UpdateProductControllerApi;
@@ -18,8 +19,8 @@ public class UpdateProductController implements UpdateProductControllerApi {
     private final UpdateProductService updateProductService;
 
     @Override
-    @PutMapping("/updateProductById/{id}")
-    public ResponseEntity<ProductResponseDto> updateProduct(
+    @PutMapping("{id}")
+    public ResponseEntity<OneMessageDTO> updateProduct(
             @PathVariable Long id,
             @RequestBody ProductCreateRequestDto productCreateRequestDto) {
         return updateProductService.updateProduct(id, productCreateRequestDto);

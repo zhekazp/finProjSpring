@@ -27,7 +27,7 @@ public interface AuthApi {
 
     })
     @PostMapping("/auth")
-    public ResponseEntity<AuthResponse> auth(@RequestBody @Valid AuthRequest request);
+    ResponseEntity<AuthResponse> auth(@RequestBody @Valid AuthRequest request);
 
     @Operation(summary = "User registration", description = "The operation is available to everyone, the default role is USER")
     @ApiResponses( value = {
@@ -42,7 +42,7 @@ public interface AuthApi {
                             examples = @ExampleObject(value = "{\"message\": \"User already exists\"}"))),
                 })
     @PostMapping("/registration")
-    public ResponseEntity<StandardResponseDto> registration(@RequestBody @Valid UserNewDTO user);
+    ResponseEntity<StandardResponseDto> registration(@RequestBody @Valid UserNewDTO user);
 
     @Operation(summary = "User email confirmation", description = "The operation is available to everyone, confirm user email ")
     @ApiResponses( value = {
@@ -58,6 +58,6 @@ public interface AuthApi {
            })
 
     @GetMapping("/confirmation")
-    public ResponseEntity<StandardResponseDto> confirmation(@RequestParam("data") String id,
+    ResponseEntity<StandardResponseDto> confirmation(@RequestParam("data") String id,
                                                @RequestParam("code") String code);
 }

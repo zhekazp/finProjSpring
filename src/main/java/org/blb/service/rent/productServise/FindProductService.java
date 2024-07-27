@@ -183,7 +183,7 @@ public class FindProductService {
 
         System.out.println("Filtered products: " + filteredProducts);
 
-        // Проверить, есть ли отфильтрованные продукты
+        // Check if there are any filtered products
         if (filteredProducts.isEmpty()) {
             throw new NotFoundException("No products found for the specified category and name");
         }

@@ -27,12 +27,12 @@ public class BlogFindService {
     private final BlogRepository blogRepository;
     private final BlCmFindService blCmFindService;
 
-    public BlogsResponseDTO findAll(BlogsRequestDTO dto) {
-        Pageable page = PageRequest.of(dto.getPageNumber(), 10);
+    public BlogsResponseDTO findAll(BlogsRequestDTO dto, Integer itemByPage) {
+        Pageable page = PageRequest.of(dto.getPageNumber(), itemByPage);
         Page<BlogResponseDTO> blogs;
         if (dto.getRegion_ID() != 0) {
             Region region = findRegionService.getRegionById(dto.getRegion_ID());
-            blogs = blogFindRepository.findDTOByRegion(region, page);
+            blogs = blogFindRepository.findDTOByRegionOrderByIdDesc(region, page);
         } else {
             blogs = blogFindRepository.findAllByOrderByIdDesc(page);
         }

@@ -11,6 +11,8 @@ import org.blb.models.user.Role;
 import org.blb.models.user.User;
 import org.blb.repository.RoleRepository;
 import org.blb.repository.blog.BlogCommentRepository;
+import org.blb.repository.blog.BlogRepository;
+import org.blb.service.blog.BlogDataService;
 import org.blb.service.blog.BlogFindService;
 import org.blb.service.user.UserFindService;
 import org.springframework.http.HttpStatus;
@@ -23,10 +25,14 @@ public class BlogCommentService {
     private final BlogCommentRepository blogCommentRepository;
     private final UserFindService userFindService;
     private final RoleRepository roleRepository;
+    private final BlogDataService blogDataService;
+    private final BlogRepository blogRepository;
 
     public void addComment(BlogCommentRequestDTO dto) {
         User user = userFindService.getUserFromContext();
         Blog blog = blogFindService.findById(dto.getBlogId());
+        blog.setComments(blog.getComments()+1);
+        blogRepository.save(blog);
         blogCommentRepository.save(new BlogComment(dto.getComment(), user, blog));
     }
     public void remove(StandardDelRequest dto) {
