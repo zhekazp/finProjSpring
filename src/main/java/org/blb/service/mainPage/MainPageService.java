@@ -32,20 +32,22 @@ public class MainPageService {
                         .findAll(PageRequest.of(0, 200,
                                 Sort.by(Sort.Order.asc("id")))).getContent();
         List<MpNewsResponse> innerNews = news.stream()
-                .filter(item -> item.getSectionName().equals("inland")).limit(15)
+                .filter(item -> (item.getSectionName().equals("inland"))
+                        && (item.getRegion().getId() > 1 && item.getRegion().getId() < 18) )
+                .limit(15)
                 .map(item -> new MpNewsResponse(item.getId(), item.getRegion().getRegionName(),
                         item.getSectionName(), item.getTitle(), item.getDate().substring(0, 10), item.getTitleImageSquare(),
-                        item.getLikeCount(), item.getUnlikeCount(), item.getCommentsCount())).toList();
+                        item.getLikeCount(), item.getDislikeCount(), item.getCommentsCount())).toList();
         List<MpNewsResponse> sport = news.stream()
                 .filter(item -> item.getSectionName().equals("sport")).limit(6)
                 .map(item -> new MpNewsResponse(item.getId(), item.getRegion().getRegionName(),
                         item.getSectionName(), item.getTitle(), item.getDate().substring(0, 10), item.getTitleImageSquare(),
-                        item.getLikeCount(), item.getUnlikeCount(), item.getCommentsCount())).toList();
+                        item.getLikeCount(), item.getDislikeCount(), item.getCommentsCount())).toList();
         List<MpNewsResponse> world = news.stream()
                 .filter(item -> item.getSectionName().equals("ausland")).limit(4)
                 .map(item -> new MpNewsResponse(item.getId(), item.getRegion().getRegionName(),
                         item.getSectionName(), item.getTitle(), item.getDate().substring(0, 10), item.getTitleImageSquare(),
-                        item.getLikeCount(), item.getUnlikeCount(), item.getCommentsCount())).toList();
+                        item.getLikeCount(), item.getDislikeCount(), item.getCommentsCount())).toList();
         List<BlogResponseDTO> blogs = blogFindService.findAll(new BlogsRequestDTO(0, (long) 0), 3).getBlogs();
 
         List<MpRentResponse> rent = productRepository
