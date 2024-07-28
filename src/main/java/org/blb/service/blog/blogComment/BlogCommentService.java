@@ -9,7 +9,7 @@ import org.blb.models.blog.Blog;
 import org.blb.models.blog.BlogComment;
 import org.blb.models.user.Role;
 import org.blb.models.user.User;
-import org.blb.repository.RoleRepository;
+import org.blb.repository.user.RoleRepository;
 import org.blb.repository.blog.BlogCommentRepository;
 import org.blb.repository.blog.BlogRepository;
 import org.blb.service.blog.BlogDataService;

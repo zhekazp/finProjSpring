@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.blb.DTO.rent.categoryDto.CategoryCreateRequestDto;
 import org.blb.DTO.rent.categoryDto.CategoryResponseDto;
+import org.blb.controller.api.rent.category.AddCategoryControllerApi;
 import org.blb.service.rent.categoryService.AddCategoryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,16 +14,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/rent/categories")
+@RequestMapping("/admin/rent/categories")
 @AllArgsConstructor
-public class AddCategoryController {
+public class AddCategoryController implements AddCategoryControllerApi {
 
   private final AddCategoryService addCategoryService;
 
-    @PostMapping("/add")
-    public ResponseEntity<CategoryResponseDto> addCategory(@Valid @RequestBody CategoryCreateRequestDto requestDto) {
-        CategoryResponseDto responseDto = addCategoryService.addCategory(requestDto.getName());
-        return ResponseEntity.ok(responseDto);
+    @PostMapping
+    public ResponseEntity<?> addCategory(@Valid @RequestBody CategoryCreateRequestDto requestDto) {
+        return addCategoryService.addCategory(requestDto.getName());
     }
 
 }

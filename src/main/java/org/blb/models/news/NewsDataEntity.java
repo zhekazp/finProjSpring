@@ -17,9 +17,9 @@ public class NewsDataEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-   @ManyToOne
-   @JoinColumn(name = "region_id", referencedColumnName = "id")
-   private Region region = new Region();
+    @ManyToOne
+    @JoinColumn(name = "region_id", referencedColumnName = "id")
+    private Region region = new Region();
 
     private String sectionName;
     private String title;
@@ -34,7 +34,7 @@ public class NewsDataEntity {
     private int likeCount = 0;
 
     @Column(nullable = false)
-    private int unlikeCount = 0;
+    private int dislikeCount = 0;
 
     @Column(nullable = false, name = "comments_count")
     private int commentsCount = 0;
