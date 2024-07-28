@@ -30,7 +30,7 @@ public interface BlogsApi {
     })
 
     @GetMapping()
-    public ResponseEntity<BlogsResponseDTO> getBlogs(@RequestParam Integer page, @RequestParam Long region);
+    ResponseEntity<BlogsResponseDTO> getBlogs(@RequestParam Integer page, @RequestParam Long region);
 
     @Operation(summary = "Getting content of the blog by id", description = "The operation is available to everyone, return content of a blog")
     @ApiResponses( value = {
@@ -43,5 +43,5 @@ public interface BlogsApi {
 
     })
     @GetMapping("/{id}")
-    public ResponseEntity<ContentResponseDTO> getBlog(@PathVariable Long id);
+    ResponseEntity<ContentResponseDTO> getBlog(@PathVariable Long id);
 }
