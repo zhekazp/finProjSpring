@@ -2,13 +2,10 @@ package org.blb.service.user;
 
 import org.blb.exeption.AlreadyExistException;
 import org.blb.exeption.NotFoundException;
-import org.blb.exeption.RestException;
 import org.blb.models.user.User;
-import org.blb.repository.UserRepository;
-import org.springframework.http.HttpStatus;
+import org.blb.repository.user.UserRepository;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

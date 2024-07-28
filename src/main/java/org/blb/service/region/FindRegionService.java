@@ -31,31 +31,22 @@ public class FindRegionService {
     }
 
     public RegionDTO findRegionById(Long id) {
-        Optional<Region> foundedRegionOpt= regionRepository.findById(id);
+        Optional<Region> foundedRegionOpt = regionRepository.findById(id);
 
         if (foundedRegionOpt.isPresent()) {
             return regionConverter.toDTO(foundedRegionOpt.get());
-        }else {
+        } else {
             throw new RestException(HttpStatus.NOT_FOUND, "Region with ID = " + id + " not found");
         }
     }
 
     public RegionDTO findRegionByName(String name) {
-        Optional<Region> foundedRegionOpt= regionRepository.findByRegionName(name);
+        Optional<Region> foundedRegionOpt = regionRepository.findByRegionName(name);
 
         if (foundedRegionOpt.isPresent()) {
             return regionConverter.toDTO(foundedRegionOpt.get());
-        }else {
-            throw new RestException(HttpStatus.NOT_FOUND, "Region with name '" + name + "' not found");
-        }
-    }
-
-    public List<Region> getAllRegions() {
-        List<Region> regions = regionRepository.findAll();
-        if (!regions.isEmpty()) {
-            return regionRepository.findAll();
         } else {
-            throw new RestException(HttpStatus.NOT_FOUND, "No regions found");
+            throw new RestException(HttpStatus.NOT_FOUND, "Region with name '" + name + "' not found");
         }
     }
 
@@ -69,13 +60,4 @@ public class FindRegionService {
         }
     }
 
-    public Region getRegionByName(String regionName) {
-        Optional<Region> foundedRegionOpt= regionRepository.findByRegionName(regionName);
-
-        if (foundedRegionOpt.isPresent()) {
-            return foundedRegionOpt.get();
-        }else {
-            throw new RestException(HttpStatus.NOT_FOUND, "Region with name '" + regionName + "' not found");
-        }
-    }
 }

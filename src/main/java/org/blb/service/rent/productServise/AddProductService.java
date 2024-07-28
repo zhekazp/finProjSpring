@@ -12,7 +12,6 @@ import org.blb.models.region.Region;
 import org.blb.models.rent.Category;
 import org.blb.models.rent.Product;
 import org.blb.models.user.User;
-import org.blb.repository.UserRepository;
 import org.blb.repository.region.RegionRepository;
 import org.blb.repository.rent.CategoryRepository;
 import org.blb.repository.rent.ProductRepository;

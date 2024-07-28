@@ -3,9 +3,11 @@ package org.blb.service.news;
 import lombok.AllArgsConstructor;
 import org.blb.DTO.appDTO.StandardResponseDto;
 import org.blb.DTO.news.newsJsonModel.FetchNewsDataDTO;
+import org.blb.exeption.RestException;
 import org.blb.models.news.NewsDataEntity;
 import org.blb.repository.news.NewsDataRepository;
 import org.blb.service.util.newsMapping.NewsDataConverter;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,6 +33,7 @@ public class AddNewsDataService {
 
             if (newsDate.compareTo(lastDate) > 0) {
                 NewsDataEntity newsDataEntity = newsDataConverter.fromFetchApiToEntity(fetchNewsDataDTO);
+
                 newsDataRepository.save(newsDataEntity);
             }
         }
