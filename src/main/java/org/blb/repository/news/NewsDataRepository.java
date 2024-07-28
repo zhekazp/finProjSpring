@@ -17,6 +17,7 @@ public interface NewsDataRepository extends JpaRepository<NewsDataEntity, Long> 
     Page<NewsDataEntity> findBySectionName(String sectionName, Pageable pageable);
     Page<NewsDataEntity> findByRegionId(Long regionId, Pageable pageable);
 
+
     @Query("SELECT MAX(date) FROM NewsDataEntity")
     Optional<String> findLastDate();
 }
