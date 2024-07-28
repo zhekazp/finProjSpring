@@ -19,8 +19,6 @@ public class DeleteProductService {
     private final ProductRepository productRepository;
     private final UserFindService userFindService;
 
-
-
     public ResponseEntity<OneMessageDTO> deleteProduct(Long id) {
 
         User currentUser = userFindService.getUserFromContext();
@@ -32,7 +30,7 @@ public class DeleteProductService {
             productRepository.deleteById(id);
             return new ResponseEntity<>(new OneMessageDTO("Product deleted successfully"), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(new OneMessageDTO("You do not have permission to delete this product"), HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>(new OneMessageDTO("You do not have permission to delete this product"), HttpStatus.CONFLICT);
         }
     }
 }

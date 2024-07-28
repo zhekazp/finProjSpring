@@ -1,7 +1,7 @@
 package org.blb.security.service;
 
 import lombok.RequiredArgsConstructor;
-import org.blb.repository.UserRepository;
+import org.blb.repository.user.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

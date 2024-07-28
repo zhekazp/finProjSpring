@@ -8,6 +8,7 @@ import org.blb.DTO.validationErrorDto.ValidationErrorDto;
 import org.blb.DTO.validationErrorDto.ValidationErrorsDto;
 import org.blb.exeption.AlreadyExistException;
 import org.blb.exeption.NotFoundException;
+import org.blb.exeption.NullArgException;
 import org.blb.exeption.RestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -52,6 +53,11 @@ public class GlobalExceptionHandler {
                     .message(exception.getMessage())
                     .build();
             return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        @ExceptionHandler(NullArgException.class)
+        public ResponseEntity<String> handlerNullArgException(NullArgException exception) {
+            return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
         }
 
         //при валилации данных когда @RequestParam или @PathVariable

@@ -1,6 +1,5 @@
 package org.blb.service.user;
 
-import org.blb.DTO.appDTO.OneMessageDTO;
 import org.blb.DTO.appDTO.StandardResponseDto;
 import org.blb.exeption.RestException;
 import org.springframework.http.HttpStatus;
@@ -11,8 +10,8 @@ import org.blb.DTO.user.UserNewDTO;
 import org.blb.models.user.Role;
 import org.blb.models.user.State;
 import org.blb.models.user.User;
-import org.blb.repository.RoleRepository;
-import org.blb.repository.UserRepository;
+import org.blb.repository.user.RoleRepository;
+import org.blb.repository.user.UserRepository;
 import org.blb.security.dto.AuthResponse;
 import org.blb.security.service.JwtTokenProvider;
 import org.blb.service.mail.MailCreateUtil;

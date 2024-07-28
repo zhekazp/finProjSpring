@@ -1,5 +1,6 @@
 package org.blb.DTO.rent.categoryDto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,7 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CategoryResponseDto {
-    private Long id;
+    @Schema(description = "Category of the product", example = "{\"name\": \"Vehicles\"}")
     private String name;
-
 }
