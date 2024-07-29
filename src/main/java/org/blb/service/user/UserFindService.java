@@ -1,9 +1,12 @@
 package org.blb.service.user;
 
+import org.blb.DTO.user.UserResponseDTO;
 import org.blb.exeption.AlreadyExistException;
 import org.blb.exeption.NotFoundException;
 import org.blb.models.user.User;
 import org.blb.repository.user.UserRepository;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -18,8 +21,11 @@ public class UserFindService {
         this.repository = repository;
     }
 
-    public List<User> findAllUsers() {
-        return repository.findAll();
+    public List<UserResponseDTO> findAllUsers(Integer currentPage) {
+        Pageable page = PageRequest.of(currentPage, 20);
+        return repository.findAll(page).getContent().stream()
+                .map(user-> new UserResponseDTO(user.getId(), user.getEmail(), user.getName(),
+                        user.getRole().getRole(), user.getState().toString())).toList();
     }
 
     public User getUserFromContext(){
