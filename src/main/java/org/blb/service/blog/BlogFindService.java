@@ -51,9 +51,8 @@ public class BlogFindService {
        Blog blog = blogRepository.findById(id).orElseThrow(
                 () ->new NotFoundException("Blog with id " + id +" not found" ));
         return new ContentResponseDTO(blog.getTitle(), blog.getPublishedDate(),
-                blog.getViews(), blog.getContent(), blog.getAuthor().getName(),
-                blog.getRegion().getRegionName(), blCmFindService.getCommentsOfBlog(blog));
+                blog.getViews(), blog.getAuthor().getName(),
+                blog.getRegion().getRegionName(), blog.getContent(),
+                blCmFindService.getCommentsOfBlog(blog));
     }
-
-
 }
