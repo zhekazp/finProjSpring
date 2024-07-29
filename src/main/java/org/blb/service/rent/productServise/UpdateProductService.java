@@ -2,6 +2,8 @@ package org.blb.service.rent.productServise;
 
 import lombok.AllArgsConstructor;
 import org.blb.DTO.appDTO.OneMessageDTO;
+import org.blb.DTO.region.RegionDTO;
+import org.blb.DTO.region.RegionJustWithNameDto;
 import org.blb.DTO.rent.productDto.ProductCreateRequestDto;
 import org.blb.models.region.Region;
 import org.blb.models.rent.Category;
@@ -10,6 +12,7 @@ import org.blb.models.user.User;
 import org.blb.repository.region.RegionRepository;
 import org.blb.repository.rent.CategoryRepository;
 import org.blb.repository.rent.ProductRepository;
+import org.blb.service.region.FindRegionService;
 import org.blb.service.user.UserFindService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +26,7 @@ public class UpdateProductService {
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
     private final UserFindService userFindService;
-    private final RegionRepository regionRepository;
+    private final FindRegionService findRegionService;
 
     public ResponseEntity<OneMessageDTO> updateProduct(Long productId, ProductCreateRequestDto productCreateRequestDto) {
         Optional<Product> existingProductOpt = productRepository.findById(productId);
@@ -59,9 +62,11 @@ public class UpdateProductService {
                 existingProduct.setDescription(productCreateRequestDto.getDescription());
             }
             if (productCreateRequestDto.getRegion() != null) {
-                Optional<Region> regionOpt = regionRepository.findByRegionName(productCreateRequestDto.getRegion().getRegionName());
-                if (regionOpt.isPresent()) {
-                    existingProduct.setRegion(regionOpt.get());
+                RegionDTO regionDTO = findRegionService.findRegionByName(productCreateRequestDto.getRegion().getRegionName());
+                if (regionDTO != null) {
+                    Region region = new Region();
+                    region.setRegionName(regionDTO.getRegionName());
+                    existingProduct.setRegion(region);
                 } else {
                     return new ResponseEntity<>(new OneMessageDTO("Region with name " + productCreateRequestDto.getRegion().getRegionName() + " not found."), HttpStatus.NOT_FOUND);
                 }
