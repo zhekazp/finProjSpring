@@ -13,10 +13,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Schema(name = "Region DTO")
 public class RegionDTO {
+    @Schema(description = "Region ID", example = "8")
+    @NotNull(message = "Region name must be not null.")
+    private Long id;
 
     @NotBlank(message = "Region name must be not blank.")
     @NotNull(message = "Region name must be not null.")
     @Schema(description = "Region name", example = "Hessen")
     private String regionName;
+
+    public RegionDTO(String regionName) {
+        this.regionName = regionName;
+    }
 
 }
