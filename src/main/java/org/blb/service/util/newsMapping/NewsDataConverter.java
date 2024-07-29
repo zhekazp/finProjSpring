@@ -6,14 +6,12 @@ import org.blb.DTO.news.newsJsonModel.FetchNewsDataDTO;
 import org.blb.models.news.NewsDataEntity;
 import org.blb.models.region.Region;
 import org.blb.service.region.FindRegionService;
-import org.blb.service.util.regionMapping.RegionConverter;
 import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
 public class NewsDataConverter {
     private final FindRegionService findRegionService;
-    private final RegionConverter regionConverter;
 
     public NewsDataResponseDto fromEntityToDto(NewsDataEntity newsDataEntity) {
         NewsDataResponseDto dto = new NewsDataResponseDto();
@@ -23,7 +21,7 @@ public class NewsDataConverter {
         dto.setRegionName(newsDataEntity.getRegion().getRegionName());
         dto.setSectionName(newsDataEntity.getSectionName());
         dto.setTitle(newsDataEntity.getTitle());
-        dto.setDate(newsDataEntity.getDate());
+        dto.setDate(newsDataEntity.getDate().substring(0, 16).replace('T',' '));
         dto.setTitleImageSquare(newsDataEntity.getTitleImageSquare());
         dto.setTitleImageWide(newsDataEntity.getTitleImageWide());
         dto.setContent(newsDataEntity.getContent());
