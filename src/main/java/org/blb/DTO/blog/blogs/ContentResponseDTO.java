@@ -10,7 +10,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class ContentResponseDTO {
-
     @Schema(description = "Blog title", example = "Some title")
     private String title;
     @Schema(description = "Date of publishing", example = "2024-07-23")

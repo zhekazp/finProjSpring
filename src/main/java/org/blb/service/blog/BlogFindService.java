@@ -54,6 +54,4 @@ public class BlogFindService {
                 blog.getViews(), blog.getContent(), blog.getAuthor().getName(),
                 blog.getRegion().getRegionName(), blCmFindService.getCommentsOfBlog(blog));
     }
-
-
 }
