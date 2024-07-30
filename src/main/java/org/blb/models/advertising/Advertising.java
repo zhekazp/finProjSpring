@@ -23,6 +23,9 @@ public class Advertising {
     private String advertiserEmail;
     private String advertiserPhone;
     private String discount;
+    private Integer advertisingCounter;
+    private String  descriptionOfTheCoupon;
     private LocalDate createData;
     private LocalDate endData;
+    private LocalDate currentDate;
 }
