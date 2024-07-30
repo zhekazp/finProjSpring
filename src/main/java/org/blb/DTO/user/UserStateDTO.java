@@ -7,17 +7,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Schema(description = "data use for change user state")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "data use for change user role")
-public class UserRoleDTO {
-
+public class UserStateDTO {
     @NotNull
     @Min(1)
     @Schema(description = "User id", example = "7")
-    private Long userId;
-    @Schema(description = "false - user has state 'USER' - true 'ADMIN'", example = "false")
+    private  Long id;
     @NotNull
-    private Long roleId;
+    @Schema(description = "false - user has state 'BANNED'", example = "false")
+    private Boolean confirmed;
 }

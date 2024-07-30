@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class WeatherLatLonDTO {
     private String lat;
     private String lon;
+    private String city;
 }
