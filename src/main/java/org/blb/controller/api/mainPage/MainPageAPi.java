@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import jakarta.servlet.http.HttpServletRequest;
 import org.blb.DTO.mainPageDto.MpResponseDTO;
 import org.blb.DTO.mainPageDto.MpWeatherDTO;
 import org.springframework.http.ResponseEntity;
@@ -25,5 +26,5 @@ public interface MainPageAPi {
     @ApiResponse(responseCode = "200", description ="return content.",
             content = @Content(mediaType = "application/json",
                     schema = @Schema(implementation = MpWeatherDTO.class)))
-    ResponseEntity<MpWeatherDTO> weather();
+    ResponseEntity<MpWeatherDTO> weather(HttpServletRequest request);
 }

@@ -45,7 +45,8 @@ public class OutGeoLocationApi {
         if (jsonResponse.has("latitude") && jsonResponse.has("longitude")) {
             String latFromResponse = jsonResponse.get("latitude").asText();
             String lonFromResponse = jsonResponse.get("longitude").asText();
-            return new WeatherLatLonDTO(latFromResponse, lonFromResponse);
+            return new WeatherLatLonDTO(latFromResponse, lonFromResponse,
+                    jsonResponse.get("city_name").asText());
         } else {
             throw new RestException(HttpStatus.NOT_FOUND, "No geo-location data available");
         }

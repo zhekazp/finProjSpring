@@ -42,11 +42,5 @@ public class TestController {
 
         return ResponseEntity.ok(mainPageService.getData());
     }
-    @GetMapping("/test/w")
-    @CrossOrigin(origins = "http://localhost:5173")
-    public ResponseEntity<MpWeatherDTO> weather(){
 
-
-        return ResponseEntity.ok(mainPageService.getWeather());
-    }
 }

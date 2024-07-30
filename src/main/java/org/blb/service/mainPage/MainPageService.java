@@ -8,10 +8,12 @@ import org.blb.DTO.mainPageDto.MpNewsResponse;
 import org.blb.DTO.mainPageDto.MpRentResponse;
 import org.blb.DTO.mainPageDto.MpResponseDTO;
 import org.blb.DTO.mainPageDto.MpWeatherDTO;
+import org.blb.DTO.weather.WeatherLatLonDTO;
 import org.blb.models.news.NewsDataEntity;
 import org.blb.repository.news.NewsDataRepository;
 import org.blb.repository.rent.ProductRepository;
 import org.blb.service.blog.BlogFindService;
+import org.blb.service.weather.OutWeatherApi;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -25,6 +27,7 @@ public class MainPageService {
     private final NewsDataRepository newsDataRepository;
     private final BlogFindService blogFindService;
     private final ProductRepository productRepository;
+    private final OutWeatherApi outWeatherApi;
 
     public MpResponseDTO getData() {
         List<NewsDataEntity> news =
@@ -58,8 +61,9 @@ public class MainPageService {
         return new MpResponseDTO(innerNews, sport, world, blogs, rent);
     }
 
-    public MpWeatherDTO getWeather() {
-        return new MpWeatherDTO("Berlin", "16", "18", "15", "Überwiegend bewölkt",
-                "6.71", "93", "10d");
+    public MpWeatherDTO getWeather(WeatherLatLonDTO position) {
+       return outWeatherApi.receivedFromWeatherMapApi(position);
+//        return new MpWeatherDTO("Berlin", "16", "18", "15", "Überwiegend bewölkt",
+//                "6.71", "93", "10d");
     }
 }
