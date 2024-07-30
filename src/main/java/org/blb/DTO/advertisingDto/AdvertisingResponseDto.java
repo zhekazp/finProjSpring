@@ -1,7 +1,13 @@
 package org.blb.DTO.advertisingDto;
 
-import java.time.LocalDate;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class AdvertisingResponseDto {
     private Long id;
     private String title;
@@ -12,4 +18,6 @@ public class AdvertisingResponseDto {
     private String discount;
     private LocalDate createData;
     private LocalDate endData;
+
+
 }
