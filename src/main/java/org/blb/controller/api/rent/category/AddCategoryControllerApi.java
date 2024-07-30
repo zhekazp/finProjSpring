@@ -29,7 +29,10 @@ public interface AddCategoryControllerApi {
             @ApiResponse(responseCode = "409", description = "Category already exists",
                     content = @Content(mediaType = "application/json",
                             examples = @ExampleObject(value = "{ \"message\": \"Category with name ... already exists.\"}"))),
-            @ApiResponse(responseCode = "500", description = "Internal server error")
+            @ApiResponse(responseCode = "500",
+                    description = "Internal server error",
+                    content = @Content(mediaType = "application/json",
+                            examples = @ExampleObject(value = "{ \"message\": \"Internal server error\"}")))
     })
     @PostMapping
     ResponseEntity<?> addCategory(@Valid @RequestBody CategoryCreateRequestDto requestDto);

@@ -22,43 +22,30 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/rent")
 public interface AddProductControllerApi {
 
-    @PostMapping
-    @Operation(summary = "Add a new product")
+    @Operation(summary = "Add new product", description = "The operation is available to registered users to add a new product.")
     @ApiResponses(value = {
-            @ApiResponse(
-                    responseCode = "201",
-                    description = "Product successfully created",
-                    content = @Content(schema = @Schema(implementation = OneMessageDTO.class),
-                            examples = @ExampleObject(value = "{ \"message\": \"Product successfully created\"}"))
-            ),
-            @ApiResponse(
-                    responseCode = "400",
-                    description = "Validation errors",
-                    content = @Content(
-                            schema = @Schema(implementation = ValidationErrorsDto.class),
-                            examples = @ExampleObject(value = """
-                                    {
-                                        "errors": [
-                                            {
-                                                "field": "category",
-                                                "rejectedValue": null,
-                                                "message": "Category with name ... not found."
-                                            },
-                                            {
-                                                "field": "region",
-                                                "rejectedValue": null,
-                                                "message": "Region with name ... not found."
-                                            }
-                                        ]
-                                    }
-                                    """)
-                    )
-            ),
-            @ApiResponse(
-                    responseCode = "500",
-                    description = "Internal server error"
-            )
+            @ApiResponse(responseCode = "201", description = "Product successfully created",
+                    content = @Content(mediaType = "application/json",
+                            examples = @ExampleObject(value = "{ \"message\": \"Product successfully created\"}"))),
+            @ApiResponse(responseCode = "404", description = "Region or category not found",
+                    content = @Content(mediaType = "application/json",
+                            examples = @ExampleObject(value = "{\n" +
+                                    "    \"errors\": [\n" +
+                                    "        {\n" +
+                                    "            \"field\": \"category\",\n" +
+                                    "            \"message\": \"Category with name ... not found.\"\n" +
+                                    "        },\n" +
+                                    "        {\n" +
+                                    "            \"field\": \"region\",\n" +
+                                    "            \"message\": \"Region with name ... not found.\"\n" +
+                                    "        }\n" +
+                                    "    ]\n" +
+                                    "}"))),
+            @ApiResponse(responseCode = "500", description = "An unexpected error occurred",
+                    content = @Content(mediaType = "application/json",
+                            examples = @ExampleObject(value = "{ \"message\": \"An unexpected error occurred. Please try again later.\" }")))
     })
-    ResponseEntity<?> addNewProduct(@Valid @RequestBody ProductCreateRequestDto request);
+    @PostMapping
+    ResponseEntity<?> addNewProduct(@RequestBody ProductCreateRequestDto request);
 }
 

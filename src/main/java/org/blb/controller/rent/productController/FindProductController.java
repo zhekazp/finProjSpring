@@ -3,6 +3,7 @@ package org.blb.controller.rent.productController;
 import lombok.AllArgsConstructor;
 import org.blb.DTO.rent.ProductSearchResponse;
 import org.blb.DTO.rent.productDto.ProductResponseDto;
+import org.blb.controller.api.rent.product.FindProductControllerApi;
 import org.blb.service.rent.productServise.FindProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/rents")
-public class FindProductController{
+public class FindProductController implements FindProductControllerApi {
 
     private final FindProductService findProductService;
 
