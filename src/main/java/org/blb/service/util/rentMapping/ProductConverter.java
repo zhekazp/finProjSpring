@@ -3,6 +3,7 @@ package org.blb.service.util.rentMapping;
 
 import lombok.AllArgsConstructor;
 import org.blb.DTO.region.RegionDTO;
+import org.blb.DTO.region.RegionJustWithNameDto;
 import org.blb.DTO.rent.categoryDto.CategoryCreateRequestDto;
 import org.blb.DTO.rent.productDto.ProductCreateRequestDto;
 import org.blb.DTO.rent.productDto.ProductResponseDto;
@@ -64,16 +65,17 @@ public class ProductConverter {
         if(product.getPrice() != null){
             productResponseDto.setPrice(product.getPrice());
         }
-        if(product.getIsInStock() != null){
-            productResponseDto.setIsInStock(product.getIsInStock());
-        }
+        //if(product.getIsInStock() != null){
+         //   productResponseDto.setIsInStock(product.getIsInStock());
+        //}
 
         if(product.getDescription() != null){
             productResponseDto.setDescription(product.getDescription());
         }
 
         if (product.getRegion() != null) {
-            RegionDTO regionDto = new RegionDTO(product.getRegion().getRegionName());
+            RegionJustWithNameDto regionDto = new RegionJustWithNameDto(product.getRegion().getRegionName());
+           // RegionDTO regionDto = new RegionDTO(product.getRegion().getRegionName());
             productResponseDto.setRegion(regionDto);
         }
         if(product.getUser() !=null){

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.blb.DTO.region.RegionDTO;
+import org.blb.DTO.region.RegionJustWithNameDto;
 import org.blb.DTO.rent.categoryDto.CategoryCreateRequestDto;
 import org.blb.DTO.user.UserJustWithNameDto;
 
@@ -26,10 +27,10 @@ public class ProductResponseDto {
     private String description;
 
     @Schema(description = "Region where the product is available", example = "{\"regionName\": \"Bremen\"}")
-    private RegionDTO region;
+    private RegionJustWithNameDto region;
 
-    @Schema(description = "Indicates whether the product is in stock", example = "true")
-    private Boolean isInStock;
+    //@Schema(description = "Indicates whether the product is in stock", example = "true")
+    //private Boolean isInStock;
 
     @Schema(description = "Owner of the product", example = "{\"name\": \"john\"}")
     private UserJustWithNameDto owner;
