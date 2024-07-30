@@ -45,5 +45,6 @@ public interface FindProductControllerApi {
     ResponseEntity<ProductSearchResponse> findProducts(
             @RequestParam(required = false) String region,
             @RequestParam(required = false) String category,
-            @RequestParam(required = false) String name);
+            @RequestParam(required = false) String name,
+            @RequestParam(defaultValue = "0") int page);
 }

@@ -12,7 +12,13 @@ import org.blb.models.rent.Product;
 import org.blb.repository.region.RegionRepository;
 import org.blb.repository.rent.CategoryRepository;
 import org.blb.repository.rent.ProductRepository;
+import org.blb.service.region.FindRegionService;
+import org.blb.service.rent.categoryService.FindCategoryService;
 import org.blb.service.util.rentMapping.ProductConverter;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -29,119 +35,94 @@ public class FindProductService {
 
     private final ProductRepository productRepository;
     private final ProductConverter productConverter;
-    private final CategoryRepository categoryRepository;
-    private final RegionRepository regionRepository;
+    private final FindRegionService findRegionService;
+    private final FindCategoryService findCategoryService;
+    private final int defaultPageSize = 10;
 
-    public ProductSearchResponse findProducts(String regionName, String categoryName, String name) {
+    public ProductSearchResponse findProducts(String regionName, String categoryName, String productName, int page) {
         List<FieldErrorDto> fieldErrors = new ArrayList<>();
-        List<Product> products = new ArrayList<>();
 
-        Optional<Region> regionOpt = regionName != null ? regionRepository.findByRegionName(regionName) : Optional.empty();
-        Optional<Category> categoryOpt = categoryName != null ? categoryRepository.findByName(categoryName) : Optional.empty();
+        // Search for region and category, if specified
+        Optional<Region> regionOpt = Optional.ofNullable(regionName)
+                .filter(name -> !name.isEmpty())
+                .flatMap(findRegionService::findRegionByNameOptional);
+        Optional<Category> categoryOpt = Optional.ofNullable(categoryName)
+                .filter(catName -> !catName.isEmpty())
+                .flatMap(findCategoryService::findByName);
 
-        if (regionName != null && categoryName != null && name != null) {
-            products = findByRegionAndCategoryAndName(regionOpt, categoryOpt, name, fieldErrors);
-        } else if (regionName != null && categoryName != null) {
-            products = findByRegionAndCategory(regionOpt, categoryOpt, fieldErrors);
-        } else if (regionName != null && name != null) {
-            products = findByRegionAndName(regionOpt, name, fieldErrors);
-        } else if (categoryName != null && name != null) {
-            products = findByCategoryAndName(categoryOpt, name, fieldErrors);
-        } else if (regionName != null) {
-            products = findByRegion(regionOpt, fieldErrors);
-        } else if (categoryName != null) {
-            products = findByCategory(categoryOpt, fieldErrors);
-        } else if (name != null) {
-            products = findByName(name, fieldErrors);
-        } else {
-            products = productRepository.findAll();
+        // Checking for errors only for the specified parameters
+        if (regionName != null && !regionName.isEmpty()) {
+            validateRegion(regionOpt, fieldErrors);
+        }
+        if (categoryName != null && !categoryName.isEmpty()) {
+            validateCategory(categoryOpt, fieldErrors);
         }
 
-        if (products.isEmpty() && fieldErrors.isEmpty()) {
-            fieldErrors.add(new FieldErrorDto("criteria", "No products found for the specified criteria", null));
+        // If there are errors, return a response with an empty list of products
+        if (!fieldErrors.isEmpty()) {
+            return new ProductSearchResponse(new ArrayList<>(),
+                    new ErrorResponseDto("Errors occurred", fieldErrors), 0, 0);
         }
 
-        List<ProductResponseDto> dtos = products.stream()
+        // Setting pagination
+        Pageable pageable = PageRequest.of(page, defaultPageSize, Sort.by(Sort.Direction.DESC, "id"));
+        Page<Product> productPage = findProductsByCriteria(regionOpt, categoryOpt, productName, pageable);
+
+        List<ProductResponseDto> dtos = productPage.getContent().stream()
                 .map(productConverter::toDto)
                 .collect(Collectors.toList());
 
-        return new ProductSearchResponse(dtos, fieldErrors.isEmpty() ? null : new ErrorResponseDto("Errors occurred", fieldErrors));
+        // Если список продуктов пуст, добавить сообщение об ошибке
+        if (dtos.isEmpty()) {
+            fieldErrors.add(new FieldErrorDto("products", "No products found for the given criteria", null));
+        }
+
+
+        // Create a ProductSearchResponse object, including totalElements and totalPages
+        return new ProductSearchResponse(
+                dtos,
+                fieldErrors.isEmpty() ? null : new ErrorResponseDto("Errors occurred", fieldErrors),
+                productPage.getTotalElements(),
+                productPage.getTotalPages()
+        );
     }
 
-
-    private List<Product> findByRegionAndCategoryAndName(Optional<Region> regionOpt, Optional<Category> categoryOpt, String name, List<FieldErrorDto> fieldErrors) {
-        List<Product> products = new ArrayList<>();
+    private void validateRegion(Optional<Region> regionOpt, List<FieldErrorDto> fieldErrors) {
         if (regionOpt.isEmpty()) {
             fieldErrors.add(new FieldErrorDto("region", "Region not found", null));
         }
+    }
+
+    private void validateCategory(Optional<Category> categoryOpt, List<FieldErrorDto> fieldErrors) {
         if (categoryOpt.isEmpty()) {
             fieldErrors.add(new FieldErrorDto("category", "Category not found", null));
         }
-        if (regionOpt.isPresent() && categoryOpt.isPresent()) {
-            products = productRepository.findAllByRegionAndCategoryAndNameStartingWithIgnoreCase(regionOpt.get(), categoryOpt.get(), name);
-        }
-        return products;
     }
 
-    private List<Product> findByRegionAndCategory(Optional<Region> regionOpt, Optional<Category> categoryOpt, List<FieldErrorDto> fieldErrors) {
-        List<Product> products = new ArrayList<>();
-        if (regionOpt.isEmpty()) {
-            fieldErrors.add(new FieldErrorDto("region", "Region not found", null));
-        }
-        if (categoryOpt.isEmpty()) {
-            fieldErrors.add(new FieldErrorDto("category", "Category not found", null));
-        }
-        if (regionOpt.isPresent() && categoryOpt.isPresent()) {
-            products = productRepository.findAllByRegionAndCategory(regionOpt.get(), categoryOpt.get());
-        }
-        return products;
-    }
-
-    private List<Product> findByRegionAndName(Optional<Region> regionOpt, String name, List<FieldErrorDto> fieldErrors) {
-        List<Product> products = new ArrayList<>();
-        if (regionOpt.isEmpty()) {
-            fieldErrors.add(new FieldErrorDto("region", "Region not found", null));
+    private Page<Product> findProductsByCriteria(Optional<Region> regionOpt, Optional<Category> categoryOpt, String productName, Pageable pageable) {
+        // Here we implement the logic of search depending on the presence of parameters
+        if (regionOpt.isPresent() && categoryOpt.isPresent() && productName != null) {
+            return productRepository.findAllByRegionAndCategoryAndNameStartingWithIgnoreCase(regionOpt.get(), categoryOpt.get(), productName, pageable);
+        } else if (regionOpt.isPresent() && categoryOpt.isPresent()) {
+            return productRepository.findAllByRegionAndCategory(regionOpt.get(), categoryOpt.get(), pageable);
+        } else if (regionOpt.isPresent() && productName != null) {
+            return productRepository.findAllByRegionAndNameStartingWithIgnoreCase(regionOpt.get(), productName, pageable);
+        } else if (categoryOpt.isPresent() && productName != null) {
+            return productRepository.findAllByCategoryAndNameStartingWithIgnoreCase(categoryOpt.get(), productName, pageable);
+        } else if (regionOpt.isPresent()) {
+            return productRepository.findAllByRegion(regionOpt.get(), pageable);
+        } else if (categoryOpt.isPresent()) {
+            return productRepository.findAllByCategory(categoryOpt.get(), pageable);
+        } else if (productName != null) {
+            return productRepository.findByNameStartingWithIgnoreCase(productName, pageable);
         } else {
-            products = productRepository.findAllByRegionAndNameStartingWithIgnoreCase(regionOpt.get(), name);
+            return productRepository.findAll(pageable);
         }
-        return products;
     }
 
-    private List<Product> findByCategoryAndName(Optional<Category> categoryOpt, String name, List<FieldErrorDto> fieldErrors) {
-        List<Product> products = new ArrayList<>();
-        if (categoryOpt.isEmpty()) {
-            fieldErrors.add(new FieldErrorDto("category", "Category not found", null));
-        } else {
-            products = productRepository.findAllByCategoryAndNameStartingWithIgnoreCase(categoryOpt.get(), name);
-        }
-        return products;
-    }
-
-    private List<Product> findByRegion(Optional<Region> regionOpt, List<FieldErrorDto> fieldErrors) {
-        List<Product> products = new ArrayList<>();
-        if (regionOpt.isEmpty()) {
-            fieldErrors.add(new FieldErrorDto("region", "Region not found", null));
-        } else {
-            products = productRepository.findAllByRegion(regionOpt.get());
-        }
-        return products;
-    }
-
-    private List<Product> findByCategory(Optional<Category> categoryOpt, List<FieldErrorDto> fieldErrors) {
-        List<Product> products = new ArrayList<>();
-        if (categoryOpt.isEmpty()) {
-            fieldErrors.add(new FieldErrorDto("category", "Category not found", null));
-        } else {
-            products = productRepository.findAllByCategory(categoryOpt.get());
-        }
-        return products;
-    }
-
-    private List<Product> findByName(String name, List<FieldErrorDto> fieldErrors) {
-        List<Product> products = productRepository.findByNameStartingWithIgnoreCase(name);
-        if (products.isEmpty()) {
-            fieldErrors.add(new FieldErrorDto("name", "No products found with name starting with '" + name + "'", null));
-        }
-        return products;
+    public ProductResponseDto findProductById(Long id) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Product not found with id: " + id));
+        return productConverter.toDto(product);
     }
 }

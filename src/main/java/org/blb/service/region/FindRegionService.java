@@ -60,4 +60,8 @@ public class FindRegionService {
         }
     }
 
+    public Optional<Region> findRegionByNameOptional(String name) {
+        return regionRepository.findByRegionName(name);
+    }
+
 }
