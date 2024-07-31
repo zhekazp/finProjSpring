@@ -70,7 +70,6 @@ public class GlobalExceptionHandler {
                 FieldErrorDto fieldError = FieldErrorDto.builder()
                         .field(violation.getPropertyPath().toString())
                         .message(violation.getMessage())
-                        .rejectedValue(violation.getInvalidValue())
                         .build();
                 fieldErrors.add(fieldError);
             });
@@ -105,10 +104,6 @@ public class GlobalExceptionHandler {
                         .field(fieldError.getField())
                         .message(fieldError.getDefaultMessage())
                         .build();
-
-                if (fieldError.getRejectedValue() != null) {
-                    errorDto.setRejectedValue(fieldError.getRejectedValue().toString());
-                }
 
                 validationErrors.add(errorDto);
             }

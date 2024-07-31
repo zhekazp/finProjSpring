@@ -55,7 +55,18 @@ public interface FindProductControllerApi {
             @ApiResponse(responseCode = "404", description = "No products found for the given criteria",
                     content = @Content(mediaType = "application/json",
                             examples = @ExampleObject(value = "{\n" +
-                                    "    \"message\": \"No products found for the given criteria\"\n" +
+                                    "    \"products\": [],\n" +
+                                    "    \"error\": {\n" +
+                                    "        \"message\": \"Errors occurred\",\n" +
+                                    "        \"fieldErrors\": [\n" +
+                                    "            {\n" +
+                                    "                \"field\": \"products\",\n" +
+                                    "                \"message\": \"No products found for the given criteria\"\n" +
+                                    "            }\n" +
+                                    "        ]\n" +
+                                    "    },\n" +
+                                    "    \"totalElements\": 0,\n" +
+                                    "    \"totalPages\": 0\n" +
                                     "}")))
     })
     @GetMapping

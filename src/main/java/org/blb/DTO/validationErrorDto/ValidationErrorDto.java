@@ -7,13 +7,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class ValidationErrorDto {
 
     private String field;
-    private String rejectedValue;
     private String message;
 
     public ValidationErrorDto(String field, String message) {
