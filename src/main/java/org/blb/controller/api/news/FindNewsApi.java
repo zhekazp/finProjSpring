@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/news")
 //@CrossOrigin(origins = "http://localhost:5173")
 public interface FindNewsApi {
-    @Operation(summary = "Getting last news", description = "The operation is available to everyone, return 300 news from latest per 1 page")
+    @Operation(summary = "Getting last news", description = "The operation is available to everyone, return 12 news from latest per 1 page")
     @ApiResponses( value = {
-            @ApiResponse(responseCode = "200", description ="Return total page count, current page, and 300 news from latest if available",
+            @ApiResponse(responseCode = "200", description ="Return total page count, current page, and 12 news from latest if available",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = NewsDataPageResponseDto.class))),
 
@@ -45,9 +45,9 @@ public interface FindNewsApi {
     ResponseEntity<NewsDataResponseDto> findNewsById(@PathVariable Long newsId);
 
 
-    @Operation(summary = "Getting last news by criteria (section OR/AND region)", description = "The operation is available to everyone, return 30 news from latest per 1 page by criteria")
+    @Operation(summary = "Getting last news by criteria (section OR/AND region)", description = "The operation is available to everyone, return 12 news from latest per 1 page by criteria")
     @ApiResponses( value = {
-            @ApiResponse(responseCode = "200", description ="Return total page count, current page, and 30 news from latest if available",
+            @ApiResponse(responseCode = "200", description ="Return total page count, current page, and 12 news from latest if available",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = NewsDataPageResponseDto.class))),
 
@@ -67,9 +67,9 @@ public interface FindNewsApi {
     @GetMapping("/findBy")
     ResponseEntity<NewsDataPageResponseDto> findByCriteria(@RequestParam Integer page, @RequestParam String section, @RequestParam String region);
 
-    @Operation(summary = "Getting last news by region ID", description = "The operation is available to everyone, return 50 news from latest per 1 page by region")
+    @Operation(summary = "Getting last news by region ID", description = "The operation is available to everyone, return 12 news from latest per 1 page by region")
     @ApiResponses( value = {
-            @ApiResponse(responseCode = "200", description ="Return total page count, current page, and 50 news from latest if available",
+            @ApiResponse(responseCode = "200", description ="Return total page count, current page, and 12 news from latest if available",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = NewsDataPageResponseDto.class))),
 
