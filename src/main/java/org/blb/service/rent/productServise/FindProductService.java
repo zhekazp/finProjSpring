@@ -74,7 +74,7 @@ public class FindProductService {
 
         // Если список продуктов пуст, добавить сообщение об ошибке
         if (dtos.isEmpty()) {
-            fieldErrors.add(new FieldErrorDto("products", "No products found for the given criteria", null));
+            fieldErrors.add(new FieldErrorDto("products", "No products found for the given criteria"));
         }
 
 
@@ -89,13 +89,13 @@ public class FindProductService {
 
     private void validateRegion(Optional<Region> regionOpt, List<FieldErrorDto> fieldErrors) {
         if (regionOpt.isEmpty()) {
-            fieldErrors.add(new FieldErrorDto("region", "Region not found", null));
+            fieldErrors.add(new FieldErrorDto("region", "Region not found"));
         }
     }
 
     private void validateCategory(Optional<Category> categoryOpt, List<FieldErrorDto> fieldErrors) {
         if (categoryOpt.isEmpty()) {
-            fieldErrors.add(new FieldErrorDto("category", "Category not found", null));
+            fieldErrors.add(new FieldErrorDto("category", "Category not found"));
         }
     }
 

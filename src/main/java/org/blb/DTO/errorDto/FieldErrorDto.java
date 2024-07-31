@@ -8,11 +8,9 @@ import lombok.Data;
 public class FieldErrorDto {
     private String field;
     private String message;
-    private Object rejectedValue;
 
-    public FieldErrorDto(String field, String message, Object rejectedValue) {
+    public FieldErrorDto(String field, String message) {
         this.field = field;
         this.message = message;
-        this.rejectedValue = rejectedValue;
     }
 }
