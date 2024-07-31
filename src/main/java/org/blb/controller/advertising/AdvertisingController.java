@@ -1,13 +1,15 @@
 package org.blb.controller.advertising;
 
 import lombok.RequiredArgsConstructor;
+import org.blb.DTO.advertisingDto.AdditionalResponseDto;
 import org.blb.DTO.advertisingDto.AdvertisingRequestDto;
 import org.blb.DTO.advertisingDto.AdvertisingResponseDto;
 import org.blb.DTO.advertisingDto.ShortAdvertisingResponseDto;
-import org.blb.DTO.appDTO.StandardDelRequest;
 import org.blb.DTO.appDTO.StandardResponseDto;
 //import org.blb.controller.api.advertising.AdvertisingApi;
-import org.blb.repository.advertising.AdvertisingRepository;
+import org.blb.controller.api.advertising.AddAdvertising;
+import org.blb.controller.api.advertising.AdvertisingApi;
+import org.blb.controller.api.advertising.DeleteAdvertising;
 import org.blb.service.advertising.CreateAdvertisingService;
 import org.blb.service.advertising.DeleteAdvertisingService;
 import org.blb.service.advertising.FindAdvertisingService;
@@ -70,45 +72,45 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/advertising")
+
 @RequiredArgsConstructor
-public class AdvertisingController {
+public class AdvertisingController implements AdvertisingApi, DeleteAdvertising, AddAdvertising {
 
     private final CreateAdvertisingService createAdvertisingService;
     private final DeleteAdvertisingService deleteAdvertisingService;
     private final FindAdvertisingService findAdvertisingService;
 
-    @PutMapping
+//    @PutMapping
     public ResponseEntity<AdvertisingResponseDto> addAdvertising(@RequestBody AdvertisingRequestDto requestDto) {
         AdvertisingResponseDto responseDto = createAdvertisingService.addAdvertising(requestDto);
         return ResponseEntity.ok(responseDto);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteAdvertising(@PathVariable Long id) {
+//    @DeleteMapping("/{id}")
+    public ResponseEntity<StandardResponseDto> deleteAdvertising(@PathVariable Long id) {
         deleteAdvertisingService.deleteAdvertising(id);
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/email")
+//    @GetMapping("/email")
     public ResponseEntity<AdvertisingResponseDto> findByAdvertiserEmail(@RequestParam String email) {
         AdvertisingResponseDto responseDto = findAdvertisingService.findByAdvertiserEmail(email);
         return ResponseEntity.ok(responseDto);
     }
 
-    @GetMapping
-    public ResponseEntity<List<ShortAdvertisingResponseDto>> findAll() {
-        List<ShortAdvertisingResponseDto> responseDtos = findAdvertisingService.findAll();
-        return ResponseEntity.ok(responseDtos);
-    }
+//    @GetMapping
+//    public ResponseEntity<List<ShortAdvertisingResponseDto>> findAll() {
+//        List<ShortAdvertisingResponseDto> responseDtos = findAdvertisingService.findAll();
+//        return ResponseEntity.ok(responseDtos);
+//    }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ShortAdvertisingResponseDto> findAdvertisingById(@PathVariable Long id) {
-        ShortAdvertisingResponseDto responseDto = findAdvertisingService.findAdvertisingById(id);
+//    @GetMapping("/{id}")
+    public ResponseEntity<AdditionalResponseDto> findAdvertisingById(@PathVariable Long id) {
+        AdditionalResponseDto responseDto = findAdvertisingService.findAdvertisingById(id);
         return ResponseEntity.ok(responseDto);
     }
 
-    @GetMapping("/random")
+//    @GetMapping()
     public ResponseEntity<List<ShortAdvertisingResponseDto>> findFiveRandomAdvertisings() {
         List<ShortAdvertisingResponseDto> responseDtos = findAdvertisingService.findFiveRandomAdvertisings();
         return ResponseEntity.ok(responseDtos);

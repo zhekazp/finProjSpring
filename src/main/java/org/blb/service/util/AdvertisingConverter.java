@@ -1,5 +1,6 @@
 package org.blb.service.util;
 
+import org.blb.DTO.advertisingDto.AdditionalResponseDto;
 import org.blb.DTO.advertisingDto.AdvertisingRequestDto;
 import org.blb.DTO.advertisingDto.AdvertisingResponseDto;
 import org.blb.DTO.advertisingDto.ShortAdvertisingResponseDto;
@@ -59,8 +60,22 @@ public class AdvertisingConverter {
 
         return new ShortAdvertisingResponseDto(
                 advertising.getId(),
+                advertising.getTitle()
+
+        );
+    }
+
+    public AdditionalResponseDto additionalResponseDto(Advertising advertising) {
+        return new AdditionalResponseDto(
                 advertising.getTitle(),
-                advertising.getDescription()
+                advertising.getDescription(),
+                advertising.getAdvertiserName(),
+                advertising.getAdvertiserEmail(),
+                advertising.getAdvertiserPhone(),
+                advertising.getDiscount(),
+                advertising.getDescriptionOfTheCoupon(),
+                advertising.getCreateData(),
+                advertising.getEndData()
         );
     }
 

@@ -32,6 +32,7 @@ public interface UserAPI {
     })
 
     @GetMapping("/{page}")
+
     ResponseEntity<List<UserResponseDTO>> getUsers(@PathVariable Integer page);
 
     @Operation(summary = "Return to Admin list of user roles and user statuses", description = "The operation is available to admin user")
