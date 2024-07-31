@@ -14,6 +14,6 @@ public class ShortAdvertisingResponseDto {
     private Long advertisingId;
     @Schema(name = "advertising id",example = "some title")
     private String title;
-    @Schema(name = "advertising id",example = "some text description ")
-    private String description;
+//    @Schema(name = "advertising id",example = "some text description ")
+//    private String description;
 }

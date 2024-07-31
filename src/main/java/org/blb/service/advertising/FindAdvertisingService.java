@@ -1,6 +1,7 @@
 package org.blb.service.advertising;
 
 import lombok.AllArgsConstructor;
+import org.blb.DTO.advertisingDto.AdditionalResponseDto;
 import org.blb.DTO.advertisingDto.AdvertisingResponseDto;
 import org.blb.DTO.advertisingDto.ShortAdvertisingResponseDto;
 import org.blb.exeption.NotFoundException;
@@ -39,7 +40,7 @@ public class FindAdvertisingService {
         return shortAdvertisingResponseDtos;
     }
 
-    public ShortAdvertisingResponseDto findAdvertisingById(Long id) {
+    public AdditionalResponseDto findAdvertisingById(Long id) {
         Advertising advertising = advertisingRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Advertising with id = " + id + " not found"));
 
@@ -48,7 +49,7 @@ public class FindAdvertisingService {
             advertisingRepository.save(advertising);
         }
 
-        return advertisingConverter.shortAdvertisingFromEntityToDto(advertising);
+        return advertisingConverter.additionalResponseDto(advertising);
     }
 
     public List<ShortAdvertisingResponseDto> findFiveRandomAdvertisings() {

@@ -28,5 +28,6 @@ public interface UserAPI {
     })
 
     @GetMapping("/{page}")
+
     ResponseEntity<List<UserResponseDTO>> getUsers(@PathVariable Integer page);
 }
