@@ -37,10 +37,10 @@ public class TestController {
 
     @GetMapping("/test")
     @CrossOrigin(origins = "http://localhost:5173")
-    public ResponseEntity<MpResponseDTO> test(){
+    public ResponseEntity<String> test(){
 
 
-        return ResponseEntity.ok(mainPageService.getData());
+        return ResponseEntity.ok(System.getenv("GEOAPI")+" geo");
     }
 
 }

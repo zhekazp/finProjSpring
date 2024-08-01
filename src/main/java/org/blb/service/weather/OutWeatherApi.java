@@ -87,7 +87,7 @@ public class OutWeatherApi {
         return UriComponentsBuilder.fromHttpUrl("https://api.openweathermap.org/data/2.5/weather")
                 .queryParam("lat",lat)
                 .queryParam("lon",lon)
-                .queryParam("appid","f50946ae037fac8bf6d00e493c5e5a8d")
+                .queryParam("appid",System.getenv("GEOAPI"))
                 .queryParam("units","metric")
                 .queryParam("lang","de")
                 .build()
