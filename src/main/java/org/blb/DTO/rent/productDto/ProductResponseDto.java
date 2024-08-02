@@ -15,6 +15,9 @@ import org.blb.DTO.user.UserJustWithNameDto;
 @NoArgsConstructor
 public class ProductResponseDto {
 
+    @Schema(description = "Id of current product", example = "1")
+    private Long id;
+
     @Schema(description = "URL of the product image", example = "https://your-bucket-url/image.png")
     private String imageUrl;
 
