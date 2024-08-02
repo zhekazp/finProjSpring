@@ -33,7 +33,7 @@ public interface BlogApi {
 
     @Operation(summary = "Deleting blog", description = "The operation is available to owner of the blog or admin")
     @ApiResponses( value = {
-            @ApiResponse(responseCode = "200", description ="Information about blog deleting",
+            @ApiResponse(responseCode = "201", description ="Information about blog deleting",
                     content = @Content(mediaType = "application/json",
                             examples = @ExampleObject(value = "{ \"message\": \"Blog removed successfully\"}"))),
             @ApiResponse(responseCode = "409", description = "Only author can dell blog",
