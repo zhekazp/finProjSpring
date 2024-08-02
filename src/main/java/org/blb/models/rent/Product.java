@@ -31,7 +31,7 @@ public class Product {
     private String description;
 
     @Column(length = 1000)
-    private String link;
+    private String imageUrl;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
@@ -42,6 +42,7 @@ public class Product {
     @JoinColumn(name = "region_id", referencedColumnName = "id")
     @JsonBackReference
     private Region region;
+
 
     public Product(String name, Category category, Double price, Boolean isInStock) {
         this.name = name;
