@@ -82,7 +82,7 @@ public class OutWeatherApi {
 
     private String createUrl(String lat, String lon) {
 
-        //https://https://api.weatherbit.io/v2.0/current?lat=52.52453&lon=13.41004&key=37195ad08f4d48b98708b260b3747f6e&lang=de
+        //https://api.weatherbit.io/v2.0/current?lat=52.52453&lon=13.41004&key=ae6890f1ffa74302988ce90ffbb4e71a&lang=de
         //https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric
         return UriComponentsBuilder.fromHttpUrl("https://api.openweathermap.org/data/2.5/weather")
                 .queryParam("lat",lat)
