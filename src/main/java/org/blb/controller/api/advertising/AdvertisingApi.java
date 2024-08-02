@@ -26,8 +26,9 @@ public interface AdvertisingApi {
                     content = @Content(mediaType = "application/json",
                             examples = @ExampleObject(value = "{\"message\": \"Advertising not found\"}")))
     })
-    @GetMapping("/{email}")
-    ResponseEntity<AdvertisingResponseDto> findByAdvertiserEmail(@RequestParam String email);
+    @GetMapping("email/{email}")
+    ResponseEntity<AdvertisingResponseDto> findByAdvertiserEmail(@PathVariable String email);
+
 
     @Operation(summary = "Finding advertising by ID", description = "The operation is available to all users")
     @ApiResponses(value = {
@@ -53,4 +54,5 @@ public interface AdvertisingApi {
     })
     @GetMapping()
     ResponseEntity<List<ShortAdvertisingResponseDto>> findFiveRandomAdvertisings();
+
 }
