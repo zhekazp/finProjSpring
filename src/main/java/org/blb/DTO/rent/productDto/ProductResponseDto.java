@@ -14,6 +14,10 @@ import org.blb.DTO.user.UserJustWithNameDto;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductResponseDto {
+
+    @Schema(description = "URL of the product image", example = "https://your-bucket-url/image.png")
+    private String imageUrl;
+
     @Schema(description = "Name of the product", example = "SUP")
     private String name;
 
@@ -29,8 +33,6 @@ public class ProductResponseDto {
     @Schema(description = "Region where the product is available", example = "{\"regionName\": \"Bremen\"}")
     private RegionJustWithNameDto region;
 
-    //@Schema(description = "Indicates whether the product is in stock", example = "true")
-    //private Boolean isInStock;
 
     @Schema(description = "Owner of the product", example = "{\"name\": \"john\"}")
     private UserJustWithNameDto owner;
