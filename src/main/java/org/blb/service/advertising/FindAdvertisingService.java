@@ -45,7 +45,7 @@ public class FindAdvertisingService {
                 .orElseThrow(() -> new NotFoundException("Advertising with id = " + id + " not found"));
 
         if (!advertising.getId().equals(1L)) {
-            advertising.setAdvertisingCounter(advertising.getAdvertisingCounter() - 1);
+            advertising.setAdvertisingCounter(advertising.getAdvertisingCounter() -1);
             advertisingRepository.save(advertising);
         }
 
@@ -62,7 +62,7 @@ public class FindAdvertisingService {
 
         List<Advertising> filteredAdvertisings = advertisings.stream()
                 .filter(advertising -> !advertising.getId().equals(1L))
-                .limit(5)
+                .limit(6)
                 .collect(Collectors.toList());
 
         filteredAdvertisings.add(0, ourAdvertisement);
