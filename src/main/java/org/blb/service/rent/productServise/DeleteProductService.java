@@ -28,7 +28,7 @@ public class DeleteProductService {
 
         if (product.getUser().getId().equals(currentUser.getId())) {
             productRepository.deleteById(id);
-            return new ResponseEntity<>(new OneMessageDTO("Product deleted successfully"), HttpStatus.OK);
+            return new ResponseEntity<>(new OneMessageDTO("Product deleted successfully"), HttpStatus.NO_CONTENT);
         } else {
             return new ResponseEntity<>(new OneMessageDTO("You do not have permission to delete this product"), HttpStatus.CONFLICT);
         }
