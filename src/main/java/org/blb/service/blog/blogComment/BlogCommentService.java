@@ -46,6 +46,11 @@ public class BlogCommentService {
         blogCommentRepository.delete(comment);
     }
 
+    public void removeByBlog(Blog blog){
+        blogCommentRepository.deleteAll(blogCommentRepository.findAllByBlog(blog));
+    }
+
+
 
 
 }
