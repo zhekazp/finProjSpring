@@ -3,6 +3,7 @@ package org.blb.repository.rent;
 import org.blb.models.region.Region;
 import org.blb.models.rent.Category;
 import org.blb.models.rent.Product;
+import org.blb.models.user.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -22,4 +23,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     Page<Product> findAllByRegion(Region region, Pageable pageable);
     Page<Product> findAllByCategory(Category category, Pageable pageable);
     Page<Product> findByNameStartingWithIgnoreCase(String name, Pageable pageable);
+
+    Page<Product> findAllByUser(User user, Pageable pageable);
 }
