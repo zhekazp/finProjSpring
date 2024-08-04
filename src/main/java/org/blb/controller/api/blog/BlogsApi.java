@@ -30,10 +30,22 @@ public interface BlogsApi {
     })
 
     @GetMapping()
-    ResponseEntity<BlogsResponseDTO> getBlogs(@RequestParam Integer page, @RequestParam Long region, Boolean user);
+    ResponseEntity<BlogsResponseDTO> getBlogs(@RequestParam Integer page, @RequestParam Long region);
 
-    @Operation(summary = "Getting content of the blog by id", description = "The operation is available to everyone, " +
-            "return content of a blog. Parameter user - true - return blogs published by current user.")
+    @Operation(summary = "Getting last blogs by current user", description = "The operation is available to registered user, return 10 blogs from latest")
+    @ApiResponses( value = {
+            @ApiResponse(responseCode = "200", description ="return total page count, current page, and 10 blogs if available.",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = BlogsResponseDTO.class))),
+            @ApiResponse(responseCode = "403", description = "Region with ID = .. not found")
+
+    })
+
+    @GetMapping("/user")
+    ResponseEntity<BlogsResponseDTO> getBlogsByUser(@RequestParam Integer page);
+
+
+    @Operation(summary = "Getting content of the blog by id", description = "The operation is available to everyone, return content of a blog")
     @ApiResponses( value = {
             @ApiResponse(responseCode = "200", description ="return content.",
                     content = @Content(mediaType = "application/json",
