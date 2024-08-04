@@ -30,7 +30,7 @@ public interface BlogsApi {
     })
 
     @GetMapping()
-    ResponseEntity<BlogsResponseDTO> getBlogs(@RequestParam Integer page, @RequestParam Long region, @RequestParam Boolean user);
+    ResponseEntity<BlogsResponseDTO> getBlogs(@RequestParam Integer page, @RequestParam Long region, Boolean user);
 
     @Operation(summary = "Getting content of the blog by id", description = "The operation is available to everyone, " +
             "return content of a blog. Parameter user - true - return blogs published by current user.")

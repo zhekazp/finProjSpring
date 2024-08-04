@@ -15,6 +15,4 @@ public class BlogsRequestDTO {
     Integer pageNumber;
     @Schema(description = "Region id", example = "7")
     Long region_ID;
-    @Schema(description = "Wich blogs returns (all/published by current user) ", example = "true")
-    Boolean user;
 }
