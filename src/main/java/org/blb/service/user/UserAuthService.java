@@ -4,6 +4,7 @@ import org.blb.DTO.appDTO.StandardResponseDto;
 import org.blb.exeption.RestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.blb.DTO.user.UserNewDTO;
@@ -66,7 +67,8 @@ public class UserAuthService {
 
         String jwt = tokenProvider.createToken(authentication.getName());
 
-        return new AuthResponse(jwt);
+        return new AuthResponse(jwt, authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority).toList().get(0));
     }
     public ResponseEntity<StandardResponseDto> confirm(String id, String code){
         Long userId= decodeUserId(id);
