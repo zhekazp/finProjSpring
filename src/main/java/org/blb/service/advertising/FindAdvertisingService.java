@@ -32,13 +32,24 @@ public class FindAdvertisingService {
         }
     }
 
-    public List<ShortAdvertisingResponseDto> findAll() {
+    public List<AdvertisingResponseDto> findAll() {
         List<Advertising> advertisings = advertisingRepository.findAll();
-        List<ShortAdvertisingResponseDto> shortAdvertisingResponseDtos = advertisings.stream()
-                .map(advertisingConverter::shortAdvertisingFromEntityToDto)
+        List<AdvertisingResponseDto> advertisingResponseDtos = advertisings.stream()
+                .map(advertisingConverter::fromEntityToDto)
                 .collect(Collectors.toList());
-        return shortAdvertisingResponseDtos;
+        return advertisingResponseDtos;
     }
+
+
+//    public List<AdvertisingResponseDto>  findAll(){
+//
+//        List<Advertising> advertisings = advertisingRepository.findAll();
+//        return advertisings.stream().map(advertisingConverter::fromEntityToDto).collect(Collectors.toList());
+//
+//    }
+
+
+
 
     public AdditionalResponseDto findAdvertisingById(Long id) {
         Advertising advertising = advertisingRepository.findById(id)
