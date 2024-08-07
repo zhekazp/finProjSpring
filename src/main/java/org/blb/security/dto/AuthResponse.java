@@ -8,4 +8,6 @@ import lombok.Data;
 @AllArgsConstructor
 public class AuthResponse {
     private String token;
+    @Schema(description = "User role", example = "ROLE_ADMIN")
+    private String role;
 }
