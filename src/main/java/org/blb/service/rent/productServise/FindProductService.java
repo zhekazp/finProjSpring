@@ -61,7 +61,7 @@ public class FindProductService {
         // If there are errors, return a response with an empty list of products
         if (!fieldErrors.isEmpty()) {
             return new ProductSearchResponse(new ArrayList<>(),
-                    new ErrorResponseDto("Errors occurred", fieldErrors), 0, 0);
+                    new ErrorResponseDto("Errors occurred", fieldErrors), page, 0);
         }
 
         // Setting pagination
@@ -82,7 +82,7 @@ public class FindProductService {
         return new ProductSearchResponse(
                 dtos,
                 fieldErrors.isEmpty() ? null : new ErrorResponseDto("Errors occurred", fieldErrors),
-                productPage.getTotalElements(),
+                page,
                 productPage.getTotalPages()
         );
     }
