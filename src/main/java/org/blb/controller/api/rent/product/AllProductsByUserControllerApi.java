@@ -28,7 +28,61 @@ public interface AllProductsByUserControllerApi {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Products found",
                     content = @Content(mediaType = "application/json",
-                            examples = @ExampleObject(value = "{ \"products\": [...], \"error\": null }"))),
+                            examples = @ExampleObject(value = "{\\n\" +\n" +
+                                    "                                    \"    \\\"products\\\": [\\n\" +\n" +
+                                    "                                    \"        {\\n\" +\n" +
+                                    "                                    \"            \\\"id\\\": 20,\\n\" +\n" +
+                                    "                                    \"            \\\"imageUrl\\\": \\\"https://ifiwjdganyiodnmwtdlr.supabase.co/storage/v1/object/public/blb_rent/some_link.jpg\\\",\\n\" +\n" +
+                                    "                                    \"            \\\"name\\\": \\\"Verkaufe Tisch\\\",\\n\" +\n" +
+                                    "                                    \"            \\\"category\\\": {\\n\" +\n" +
+                                    "                                    \"                \\\"name\\\": \\\"Books\\\"\\n\" +\n" +
+                                    "                                    \"            },\\n\" +\n" +
+                                    "                                    \"            \\\"price\\\": 190.0,\\n\" +\n" +
+                                    "                                    \"            \\\"description\\\": \\\"A high quality Table for a good time.\\\",\\n\" +\n" +
+                                    "                                    \"            \\\"region\\\": {\\n\" +\n" +
+                                    "                                    \"                \\\"regionName\\\": \\\"Berlin\\\"\\n\" +\n" +
+                                    "                                    \"            },\\n\" +\n" +
+                                    "                                    \"            \\\"owner\\\": {\\n\" +\n" +
+                                    "                                    \"                \\\"name\\\": \\\"currentUser\\\"\\n\" +\n" +
+                                    "                                    \"            }\\n\" +\n" +
+                                    "                                    \"        },\\n\" +\n" +
+                                    "                                    \"        {\\n\" +\n" +
+                                    "                                    \"            \\\"id\\\": 19,\\n\" +\n" +
+                                    "                                    \"            \\\"imageUrl\\\": \\\"https://ifiwjdganyiodnmwtdlr.supabase.co/storage/v1/object/public/blb_rent/some_link.jpg\\\",\\n\" +\n" +
+                                    "                                    \"            \\\"name\\\": \\\"Verkaufe Tisch\\\",\\n\" +\n" +
+                                    "                                    \"            \\\"category\\\": {\\n\" +\n" +
+                                    "                                    \"                \\\"name\\\": \\\"Electronics\\\"\\n\" +\n" +
+                                    "                                    \"            },\\n\" +\n" +
+                                    "                                    \"            \\\"price\\\": 180.0,\\n\" +\n" +
+                                    "                                    \"            \\\"description\\\": \\\"A high quality Table for a good time.\\\",\\n\" +\n" +
+                                    "                                    \"            \\\"region\\\": {\\n\" +\n" +
+                                    "                                    \"                \\\"regionName\\\": \\\"Bayern\\\"\\n\" +\n" +
+                                    "                                    \"            },\\n\" +\n" +
+                                    "                                    \"            \\\"owner\\\": {\\n\" +\n" +
+                                    "                                    \"                \\\"name\\\": \\\"currentUser\\\"\\n\" +\n" +
+                                    "                                    \"            }\\n\" +\n" +
+                                    "                                    \"        },\\n\" +\n" +
+                                    "                                    \"        {\\n\" +\n" +
+                                    "                                    \"            \\\"id\\\": 18,\\n\" +\n" +
+                                    "                                    \"            \\\"imageUrl\\\": \\\"https://ifiwjdganyiodnmwtdlr.supabase.co/storage/v1/object/public/blb_rent/some_link.jpg\\\",\\n\" +\n" +
+                                    "                                    \"            \\\"name\\\": \\\"Verkaufe Tisch\\\",\\n\" +\n" +
+                                    "                                    \"            \\\"category\\\": {\\n\" +\n" +
+                                    "                                    \"                \\\"name\\\": \\\"Others\\\"\\n\" +\n" +
+                                    "                                    \"            },\\n\" +\n" +
+                                    "                                    \"            \\\"price\\\": 170.0,\\n\" +\n" +
+                                    "                                    \"            \\\"description\\\": \\\"A high quality Table for a good time.\\\",\\n\" +\n" +
+                                    "                                    \"            \\\"region\\\": {\\n\" +\n" +
+                                    "                                    \"                \\\"regionName\\\": \\\"Baden-Württemberg\\\"\\n\" +\n" +
+                                    "                                    \"            },\\n\" +\n" +
+                                    "                                    \"            \\\"owner\\\": {\\n\" +\n" +
+                                    "                                    \"                \\\"name\\\": \\\"currentUser\\\"\\n\" +\n" +
+                                    "                                    \"            }\\n\" +\n" +
+                                    "                                    \"        }\" +\n" +
+                                    "                                    \"],\\n\" +\n" +
+                                    "                                    \"    \\\"error\\\": null,\\n\" +\n" +
+                                    "                                    \"    \\\"currentPage\\\": 0,\\n\" +\n" +
+                                    "                                    \"    \\\"totalPages\\\": 1\\n\" +\n" +
+                                    "                                    \"}"))),
             @ApiResponse(responseCode = "403", description = "Forbidden",
                     content = @Content(mediaType = "application/json",
                             examples = @ExampleObject(value = "{\n" +

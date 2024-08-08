@@ -31,7 +31,46 @@ public interface FindProductControllerApi {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Products found",
                     content = @Content(mediaType = "application/json",
-                            examples = @ExampleObject(value = "{ \"products\": [...], \"error\": null }"))),
+                            examples = @ExampleObject(value = "{\\n\" +\n" +
+                                    "                                    \"    \\\"products\\\": [\\n\" +\n" +
+                                    "                                    \"        {\\n\" +\n" +
+                                    "                                    \"            \\\"id\\\": 22,\\n\" +\n" +
+                                    "                                    \"            \\\"imageUrl\\\": null,\\n\" +\n" +
+                                    "                                    \"            \\\"name\\\": \\\"Table\\\",\\n\" +\n" +
+                                    "                                    \"            \\\"category\\\": {\\n\" +\n" +
+                                    "                                    \"                \\\"name\\\": \\\"Others\\\"\\n\" +\n" +
+                                    "                                    \"            },\\n\" +\n" +
+                                    "                                    \"            \\\"price\\\": 20.0,\\n\" +\n" +
+                                    "                                    \"            \\\"description\\\": \\\"A high quality SUP suitable for a good time.\\\",\\n\" +\n" +
+                                    "                                    \"            \\\"region\\\": {\\n\" +\n" +
+                                    "                                    \"                \\\"regionName\\\": \\\"Bremen\\\"\\n\" +\n" +
+                                    "                                    \"            },\\n\" +\n" +
+                                    "                                    \"            \\\"owner\\\": {\\n\" +\n" +
+                                    "                                    \"                \\\"name\\\": \\\"jams008\\\"\\n\" +\n" +
+                                    "                                    \"            }\\n\" +\n" +
+                                    "                                    \"        },\\n\" +\n" +
+                                    "                                    \"        {\\n\" +\n" +
+                                    "                                    \"           {\\n\" +\n" +
+                                    "                                    \"            \\\"id\\\": 1,\\n\" +\n" +
+                                    "                                    \"            \\\"imageUrl\\\": \\\"https://ifiwjdganyiodnmwtdlr.supabase.co/storage/v1/object/public/blb_rent/some_link.jpg\\\",\\n\" +\n" +
+                                    "                                    \"            \\\"name\\\": \\\"Verkaufe Tisch\\\",\\n\" +\n" +
+                                    "                                    \"            \\\"category\\\": {\\n\" +\n" +
+                                    "                                    \"                \\\"name\\\": \\\"Electronics\\\"\\n\" +\n" +
+                                    "                                    \"            },\\n\" +\n" +
+                                    "                                    \"            \\\"price\\\": 0.0,\\n\" +\n" +
+                                    "                                    \"            \\\"description\\\": null,\\n\" +\n" +
+                                    "                                    \"            \\\"region\\\": {\\n\" +\n" +
+                                    "                                    \"                \\\"regionName\\\": \\\"Baden-Württemberg\\\"\\n\" +\n" +
+                                    "                                    \"            },\\n\" +\n" +
+                                    "                                    \"            \\\"owner\\\": {\\n\" +\n" +
+                                    "                                    \"                \\\"name\\\": \\\"Administrator\\\"\\n\" +\n" +
+                                    "                                    \"            }\\n\" +\n" +
+                                    "                                    \"        },...\" +\n" +
+                                    "                                    \"],\\n\" +\n" +
+                                    "                                    \"    \\\"error\\\": null,\\n\" +\n" +
+                                    "                                    \"    \\\"currentPage\\\": 0,\\n\" +\n" +
+                                    "                                    \"    \\\"totalPages\\\": 3\\n\" +\n" +
+                                    "                                    \"}"))),
             @ApiResponse(responseCode = "400", description = "Validation error",
                     content = @Content(mediaType = "application/json",
                             examples = @ExampleObject(value = "{\n" +
