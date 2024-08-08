@@ -18,7 +18,7 @@ public interface AddNewsApi {
                     content = @Content(mediaType = "application/json",
                             examples = @ExampleObject(value = "{ \"message\": \"All news loaded successfully\"}"))),
 
-            @ApiResponse(responseCode = "404", description = "No Content: The request was successfully processed, but there is no data to return",
+            @ApiResponse(responseCode = "204", description = "No Content: The request was successfully processed, but there is no data to return",
                     content = @Content(mediaType = "application/json",
                     examples = @ExampleObject(value = "{\"message\": \"Fetch response contains no data\"}"))),
 
