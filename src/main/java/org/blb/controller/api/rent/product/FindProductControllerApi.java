@@ -31,7 +31,47 @@ public interface FindProductControllerApi {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Products found",
                     content = @Content(mediaType = "application/json",
-                            examples = @ExampleObject(value = "{ \"products\": [...], \"error\": null }"))),
+                            examples = @ExampleObject(value = "{\n" +
+                                    "  \"products\": [\n" +
+                                    "    {\n" +
+                                    "      \"id\": 22,\n" +
+                                    "      \"imageUrl\": null,\n" +
+                                    "      \"name\": \"Table\",\n" +
+                                    "      \"category\": { \"name\": \"Others\" },\n" +
+                                    "      \"price\": 20.0,\n" +
+                                    "      \"description\": \"A high quality SUP suitable for a good time.\",\n" +
+                                    "      \"region\": { \"regionName\": \"Bremen\" },\n" +
+                                    "      \"owner\": { \"name\": \"jams008\" }\n" +
+                                    "    },\n" +
+                                    "    {\n" +
+                                    "      \"id\": 1,\n" +
+                                    "      \"imageUrl\": \"https://ifiwjdganyiodnmwtdlr.supabase.co/storage/v1/object/public/blb_rent/some_link.jpg\",\n" +
+                                    "      \"name\": \"Verkaufe Tisch\",\n" +
+                                    "      \"category\": { \"name\": \"Electronics\" },\n" +
+                                    "      \"price\": 0.0,\n" +
+                                    "      \"description\": null,\n" +
+                                    "      \"region\": { \"regionName\": \"Baden-Württemberg\" },\n" +
+                                    "      \"owner\": { \"name\": \"Administrator\" }\n" +
+                                    "    }\n" +
+                                    "  ],\n" +
+                                    "  \"error\": null,\n" +
+                                    "  \"currentPage\": 0,\n" +
+                                    "  \"totalPages\": 3\n" +
+                                    "}"))),
+            @ApiResponse(responseCode = "400", description = "Validation error",
+                    content = @Content(mediaType = "application/json",
+                            examples = @ExampleObject(value = "{\n" +
+                                    "  \"products\": [],\n" +
+                                    "  \"error\": {\n" +
+                                    "    \"message\": \"Errors occurred\",\n" +
+                                    "    \"fieldErrors\": [\n" +
+                                    "      { \"field\": \"region\", \"message\": \"Region not found\" },\n" +
+                                    "      { \"field\": \"category\", \"message\": \"Category not found\" }\n" +
+                                    "    ]\n" +
+                                    "  },\n" +
+                                    "  \"totalElements\": 0,\n" +
+                                    "  \"totalPages\": 0\n" +
+                                    "}"))),
             @ApiResponse(responseCode = "400", description = "Validation error",
                     content = @Content(mediaType = "application/json",
                             examples = @ExampleObject(value = "{\n" +
